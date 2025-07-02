@@ -6,11 +6,16 @@
   <title>Vizazi vya Ukoo - Ukoo wa Makomelelo</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1740&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
+      height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    margin: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('background.png');
+    background-size: cover;
+    position: relative;
     }
     .view-icon {
       margin-left: 10px;
@@ -61,12 +66,14 @@
 
     header {
       background: linear-gradient(to right, #002d10, #02931c);
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 100;
     }
 
     header h1 {
@@ -171,12 +178,52 @@
       padding: 15px 0;
       font-size: 14px;
     }
+    /* Add this to your existing <style> section */
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 2000;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #main-nav {
+    display: none;
+    flex-direction: column;
+    background: #012f10;
+    opacity: 0.9;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    padding: 20px;
+    z-index: 2000;
+  }
+
+  #main-nav a {
+    padding: 10px 0;
+    border-bottom: 1px solid #fff;
+  }
+
+  #main-nav.active {
+    display: flex;
+  }
+}
+
   </style>
 </head>
 <body>
 
   <header>
     <h1>Ukoo wa Makomelelo</h1>
+    <!-- Add inside <header> before <nav> -->
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
     <nav id="main-nav">
       <a href="index.html">Nyumbani</a>
       <a href="register.html">Jisajili</a>
@@ -511,6 +558,12 @@
       }
     }
   </script>
+      <script>
+        function toggleMenu() {
+          const nav = document.getElementById('main-nav');
+          nav.classList.toggle('active');
+        }
+      </script>
       <script>
         function toggleMenu() {
           const nav = document.getElementById('main-nav');
