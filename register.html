@@ -1,22 +1,199 @@
 <!DOCTYPE html>
 <html lang="sw">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jisajili - Ukoo wa Makomelelo</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="datawilaya.js"></script>
+  <style>
+    /* ========== STYLE ZA MWANZO NA RANGI KIJANI ========== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('background.png');
+    background-size: cover;
+    position: relative;
+    }
+
+    header {
+      background: linear-gradient(to right, #002d10, #02931c);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 100;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    nav#main-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    nav#main-nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    nav#main-nav a:hover,
+    nav#main-nav a.active {
+      background-color: #1f3b1f;
+    }
+
+    .menu-toggle {
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      display: none;
+      color: white;
+      font-weight: 900;
+    }
+
+    main {
+      max-width: 600px;
+      background: white;
+      margin: 40px auto 60px auto;
+      padding: 35px 30px 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(44, 95, 45, 0.3);
+      color: #2c5f2d;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: 600;
+      color: #2c5f2d;
+      user-select: none;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1.5px solid #4caf50;
+      margin-top: 6px;
+      transition: border-color 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c5f2d;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #1b3a16;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px;
+      margin-top: 28px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 180px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: none;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #025005;
+    }
+
+    #successMessage {
+      margin-top: 15px;
+      color: #2e7d32;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+
+    /* =================== MOBILE RESPONSIVE =============== */
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav#main-nav {
+        flex-direction: column;
+        background-color: rgba(1, 31, 2, 0.7);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 50vw;
+        max-width: 300px;
+        padding-top: 80px;
+        transform: translateX(-100%);
+        transition: transform 0.35s ease;
+        z-index: 2000;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+      }
+
+      nav#main-nav.active {
+        transform: translateX(0);
+      }
+
+      nav#main-nav a {
+        padding: 15px 20px;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    /* Hide marital status and children details initially */
+    #maritalStatusContainer,
+    #childrenDetailsContainer,
+    #tanzaniaAddress,
+    #outsideAddress {
+      display: none;
+    }
+  </style>
 </head>
 
-
 <body>
- <!-- Eneo la kushoto la hover -->
-<div class="back-button-area"></div>
-<a href="javascript:history.back()" class="back-button" title="Rudi Nyuma">◀</a>
 
-<!-- Eneo la kulia la hover -->
-<div class="forward-button-area"></div>
-<a href="javascript:history.forward()" class="forward-button" title="Nenda Mbele">▶</a>
   <header>
     <h1>Ukoo wa Makomelelo</h1>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -30,126 +207,168 @@
   </header>
 
   <main>
+    <form id="registrationForm" novalidate>
+      <h2>Jisajili</h2>
 
-    <div class="form-container">
-      <form id="registrationForm" class="registration-form">
-        <h2>Jisajili</h2>
+      <label for="fullname">Jina Kamili</label>
+      <input type="text" id="fullname" name="fullname" required />
 
-        <label for="fullname">Jina Kamili</label>
-        <input type="text" id="fullname" name="fullname" required />
+      <label for="phone">Namba ya Simu</label>
+      <input type="text" id="phone" name="phone" required pattern="^07[0-9]{8}$"
+        title="Ingiza namba halali ya simu za Tanzania (mfano: 0712345678)" />
 
-        <label for="phone">Namba ya Simu</label>
-        <input type="text" id="phone" name="phone" required />
+      <label for="gender">Jinsia</label>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Chagua jinsia</option>
+        <option value="mwanaume">Mwanaume</option>
+        <option value="mwanamke">Mwanamke</option>
+      </select>
 
-        <label for="gender">Jinsia</label>
-        <select id="gender" name="gender" required>
-          <option value="" disabled selected>Chagua jinsia</option>
-          <option value="mwanaume">Mwanaume</option>
-          <option value="mwanamke">Mwanamke</option>
+      <div id="maritalStatusContainer">
+        <label for="maritalStatus">Hali ya ndoa</label>
+        <select id="maritalStatus" name="maritalStatus" required>
+          <option value="" disabled selected>Chagua hali ya ndoa</option>
         </select>
-
-        <div id="maritalStatusContainer" style="display:none;">
-          <label for="maritalStatus">Hali ya ndoa</label>
-          <select id="maritalStatus" name="maritalStatus">
-            <option value="" disabled selected>Chagua hali ya ndoa</option>
-          </select>
-        </div>
-
-        <div id="childrenContainer">
-          <label for="hasChildren">Je, una watoto?</label>
-          <select id="hasChildren" name="hasChildren">
-            <option value="" disabled selected>Chagua jibu</option>
-            <option value="ndiyo">Ndiyo</option>
-            <option value="hapana">Hapana</option>
-          </select>
-        </div>
-
-        <div id="childrenDetailsContainer" style="display:none;">
-          <label for="totalChildren">Idadi ya watoto (jumla)</label>
-          <input type="number" id="totalChildren" name="totalChildren" min="0" />
-
-          <label for="boysCount">Watoto wa kiume</label>
-          <input type="number" id="boysCount" name="boysCount" min="0" />
-
-          <label for="girlsCount">Watoto wa kike</label>
-          <input type="number" id="girlsCount" name="girlsCount" min="0" />
-        </div>
-
-        <label for="country">Nchi unayoishi</label>
-        <select id="country" name="country" required>
-          <option value="" disabled selected>Chagua nchi</option>
-          <option value="tanzania">Tanzania</option>
-          <option value="nje">Nje ya Tanzania</option>
-        </select>
-
-        <div id="tanzaniaAddress" style="display:none;">
-          <label for="region">Mkoa</label>
-          <select id="region" name="region">
-            <option value="" disabled selected>Chagua mkoa</option>
-            <option value="arusha">Arusha</option>
-            <option value="dar_es_salaam">Dar es Salaam</option>
-            <option value="dodoma">Dodoma</option>
-            <option value="geita">Geita</option>
-            <option value="iringa">Iringa</option>
-            <option value="kagera">Kagera</option>
-            <option value="katavi">Katavi</option>
-            <option value="kigoma">Kigoma</option>
-            <option value="kilimanjaro">Kilimanjaro</option>
-            <option value="lindi">Lindi</option>
-            <option value="manyara">Manyara</option>
-            <option value="mara">Mara</option>
-            <option value="mbeya">Mbeya</option>
-            <option value="morogoro">Morogoro</option>
-            <option value="mtwara">Mtwara</option>
-            <option value="mwanza">Mwanza</option>
-            <option value="njombe">Njombe</option>
-            <option value="pwani">Pwani</option>
-            <option value="rukwa">Rukwa</option>
-            <option value="ruvuma">Ruvuma</option>
-            <option value="shinyanga">Shinyanga</option>
-            <option value="singida">Singida</option>
-            <option value="tabora">Tabora</option>
-            <option value="tanga">Tanga</option>
-            <option value="zanzibar_north">Zanzibar Kaskazini</option>
-            <option value="zanzibar_south">Zanzibar Kusini</option>
-            <option value="zanzibar_west">Zanzibar Magharibi</option>
-            <option value="pemba_north">Pemba Kaskazini</option>
-            <option value="pemba_south">Pemba Kusini</option>
-          </select>
-
-          <label for="district">Wilaya</label>
-          <select id="district" name="district">
-            <option value="" disabled selected>Chagua wilaya</option>
-          </select>
-
-          <label for="ward">Kata (Andika)</label>
-          <input type="text" id="ward" name="ward" placeholder="Andika kata yako hapa" />
-
-          <label for="street">Mtaa/Kijiji (Andika)</label>
-          <input type="text" id="street" name="street" placeholder="Andika jina la mtaa au kijiji" />
-        </div>
-
-        <div id="outsideAddress" style="display:none;">
-          <label for="city">Jiji/Mji</label>
-          <input type="text" id="city" name="city" />
-
-          <label for="outsideCountry">Nchi</label>
-          <input type="text" id="outsideCountry" name="outsideCountry" />
-        </div>
-
-        <input type="submit" value="Jisajili" />
-        <center><a href="login.html" style="color:green;">Rudi Nyuma</a></center>
-      </form>
-
-      <div id="successMessage" style="display:none; color: green; margin-top: 10px;">
-        ✅ Hongera! Usajili wako umefanikiwa. Tafadhali ingia kwenye akaunti yako ili kuendelea.
       </div>
-    </div>
+
+      <div id="childrenContainer">
+        <label for="hasChildren">Je, una watoto?</label>
+        <select id="hasChildren" name="hasChildren" required>
+          <option value="" disabled selected>Chagua jibu</option>
+          <option value="ndiyo">Ndiyo</option>
+          <option value="hapana">Hapana</option>
+        </select>
+      </div>
+
+      <div id="childrenDetailsContainer">
+        <label for="totalChildren">Idadi ya watoto (jumla)</label>
+        <input type="number" id="totalChildren" name="totalChildren" min="0" />
+
+        <label for="boysCount">Watoto wa kiume</label>
+        <input type="number" id="boysCount" name="boysCount" min="0" />
+
+        <label for="girlsCount">Watoto wa kike</label>
+        <input type="number" id="girlsCount" name="girlsCount" min="0" />
+      </div>
+
+      <label for="country">Nchi unayoishi</label>
+      <select id="country" name="country" required>
+        <option value="" disabled selected>Chagua nchi</option>
+        <option value="tanzania">Tanzania</option>
+        <option value="nje">Nje ya Tanzania</option>
+      </select>
+
+      <div id="tanzaniaAddress">
+        <label for="region">Mkoa</label>
+        <select id="region" name="region" required>
+          <option value="" disabled selected>Chagua mkoa</option>
+          <option value="arusha">Arusha</option>
+          <option value="dar_es_salaam">Dar es Salaam</option>
+          <option value="dodoma">Dodoma</option>
+          <option value="geita">Geita</option>
+          <option value="iringa">Iringa</option>
+          <option value="kagera">Kagera</option>
+          <option value="katavi">Katavi</option>
+          <option value="kigoma">Kigoma</option>
+          <option value="kilimanjaro">Kilimanjaro</option>
+          <option value="lindi">Lindi</option>
+          <option value="manyara">Manyara</option>
+          <option value="mara">Mara</option>
+          <option value="mbeya">Mbeya</option>
+          <option value="morogoro">Morogoro</option>
+          <option value="mtwara">Mtwara</option>
+          <option value="mwanza">Mwanza</option>
+          <option value="njombe">Njombe</option>
+          <option value="pwani">Pwani</option>
+          <option value="rukwa">Rukwa</option>
+          <option value="ruvuma">Ruvuma</option>
+          <option value="shinyanga">Shinyanga</option>
+          <option value="singida">Singida</option>
+          <option value="tabora">Tabora</option>
+          <option value="tanga">Tanga</option>
+          <option value="zanzibar_north">Zanzibar Kaskazini</option>
+          <option value="zanzibar_south">Zanzibar Kusini</option>
+          <option value="zanzibar_west">Zanzibar Magharibi</option>
+          <option value="pemba_north">Pemba Kaskazini</option>
+          <option value="pemba_south">Pemba Kusini</option>
+        </select>
+
+        <label for="district">Wilaya</label>
+        <select id="district" name="district" required>
+          <option value="" disabled selected>Chagua wilaya</option>
+        </select>
+
+        <label for="ward">Kata</label>
+        <select id="ward" name="ward" required>
+          <option value="" disabled selected>Chagua kata</option>
+        </select>
+
+        <label for="street">Mtaa/Kijiji (Andika)</label>
+        <input type="text" id="street" name="street" required placeholder="Andika jina la mtaa au kijiji" />
+      </div>
+
+      <div id="outsideAddress">
+        <label for="city">Jiji/Mji</label>
+        <input type="text" id="city" name="city" />
+
+        <label for="outsideCountry">Nchi</label>
+        <input type="text" id="outsideCountry" name="outsideCountry" />
+      </div>
+
+      <input type="submit" value="Jisajili" />
+
+      <div id="successMessage">✅ Hongera! Usajili wako umefanikiwa. Tafadhali ingia kwenye akaunti yako ili kuendelea.</div>
+      <center style="margin-top:15px;">
+        <a href="login.html" style="color:#2c5f2d; font-weight:700; text-decoration:none;">Rudi Nyuma</a>
+      </center>
+    </form>
   </main>
 
-  
-
   <script>
+    // Data Wilaya
+    const dataWilaya = {
+      arusha: ['Arusha Mjini', 'Arumeru', 'Longido', 'Karatu', 'Ngorongoro'],
+      dar_es_salaam: ['Ilala', 'Kinondoni', 'Temeke', 'Ubungo', 'Kigamboni'],
+      dodoma: ['Dodoma Mjini', 'Bahi', 'Chamwino', 'Kondoa', 'Kongwa', 'Mpwapwa', 'Chemba'],
+      geita: ['Geita', 'Bukombe', 'Chato', 'Mbogwe', 'Nkome'],
+      iringa: ['Iringa Mjini', 'Kilolo', 'Mafinga', 'Mufindi'],
+      kagera: ['Bukoba Mjini', 'Bukoba Vijijini', 'Kyerwa', 'Missenyi', 'Muleba', 'Ngara'],
+      katavi: ['Mpanda Mjini', 'Mpanda Vijijini', 'Mlele', 'Nsimbo'],
+      kigoma: ['Kigoma Mjini', 'Uvinza', 'Kakonko', 'Kasulu Mjini', 'Kasulu Vijijini'],
+      kilimanjaro: ['Moshi Mjini', 'Moshi Vijijini', 'Rombo', 'Siha', 'Hai'],
+      lindi: ['Lindi Mjini', 'Kilwa', 'Liwale', 'Nachingwea', 'Ruangwa'],
+      manyara: ['Babati', 'Hanang', 'Kiteto', 'Mbulu', 'Simanjiro'],
+      mara: ['Musoma Mjini', 'Musoma Vijijini', 'Bunda', 'Butiama', 'Rorya', 'Tarime'],
+      mbeya: ['Mbeya Mjini', 'Rungwe', 'Busokelo', 'Kyela', 'Mbarali', 'Chunya'],
+      morogoro: ['Morogoro Mjini', 'Kilombero', 'Kilosa', 'Mvomero', 'Gairo', 'Ulanga', 'Kilosa'],
+      mtwara: ['Mtwara Mjini', 'Masasi', 'Nanyumbu', 'Tandahimba', 'Newala'],
+      mwanza: ['Mwanza', 'Ilemela', 'Nyamagana', 'Sengerema', 'Misungwi'],
+      njombe: ['Njombe', 'Wanging’ombe', 'Makambako', 'Ludewa'],
+      pwani: ['Kibaha', 'Bagamoyo', 'Kisarawe', 'Mafia', 'Rufiji'],
+      rukwa: ['Mpanda', 'Sumbawanga', 'Kalambo', 'Nkasi'],
+      ruvuma: ['Songea', 'Mbinga', 'Tunduru', 'Namtumbo', 'Songea Vijijini'],
+      shinyanga: ['Shinyanga Mjini', 'Kahama', 'Kishapu', 'Shinyanga Vijijini'],
+      singida: ['Singida', 'Ikungi', 'Manyoni', 'Mkalama'],
+      tabora: ['Tabora', 'Urambo', 'Nzega', 'Igunga', 'Sikonge'],
+      tanga: ['Tanga', 'Handeni', 'Korogwe', 'Lushoto', 'Pangani'],
+      zanzibar_north: ['Mkoani', 'Wete', 'Kaskazini A', 'Kaskazini B'],
+      zanzibar_south: ['Koani', 'Fumba', 'Kati', 'Michamvi', 'Kibweni'],
+      zanzibar_west: ['Mjini Magharibi', 'Kibamba', 'Mfenesini'],
+      pemba_north: ['Wete', 'Kaskazini', 'Micheweni'],
+      pemba_south: ['Chake Chake', 'Mkoani', 'Wawi']
+    };
+
+    // Sample Kata Data (ongeza zaidi kulingana na wilaya zako)
+    const dataKata = {
+      'Arusha Mjini': ['Kaloleni', 'Sombetini', 'Themi', 'Sekei'],
+      'Ilala': ['Kinyerezi', 'Tabata', 'Majohe', 'Mchikichini'],
+      'Dodoma Mjini': ['Tambukareli', 'Mkondoa', 'Nkuhungu', 'Kizota'],
+      'Bukoba Mjini': ['Kahororo', 'Katoro', 'Ihungo'],
+      'Kinondoni': ['Kijitonyama', 'Mwananyamala', 'Msasani'],
+      'Moshi Mjini': ['Arusha', 'Kaloleni', 'Sangwa']
+    };
+
+    // Elements
     const genderSelect = document.getElementById('gender');
     const maritalStatusContainer = document.getElementById('maritalStatusContainer');
     const maritalStatusSelect = document.getElementById('maritalStatus');
@@ -164,7 +383,11 @@
     const outsideAddress = document.getElementById('outsideAddress');
     const regionSelect = document.getElementById('region');
     const districtSelect = document.getElementById('district');
+    const wardSelect = document.getElementById('ward');
+    const registrationForm = document.getElementById('registrationForm');
+    const successMessage = document.getElementById('successMessage');
 
+    // Marital options by gender
     const maritalOptions = {
       mwanaume: [
         { value: 'Nimeoa', text: 'Nimeoa' },
@@ -178,87 +401,175 @@
       ]
     };
 
+    // Toggle menu function
+    function toggleMenu() {
+      document.getElementById('main-nav').classList.toggle('active');
+    }
+
+    // Update marital status options on gender change
     genderSelect.addEventListener('change', () => {
       const gender = genderSelect.value;
       if (gender) {
         maritalStatusContainer.style.display = 'block';
-        maritalStatusSelect.innerHTML = '<option value="" disabled selected>Chagua hali ya ndoa</option>';
-        maritalOptions[gender].forEach(opt => {
+        maritalStatusSelect.innerHTML =
+          '<option value="" disabled selected>Chagua hali ya ndoa</option>';
+        maritalOptions[gender].forEach((opt) => {
           const option = document.createElement('option');
           option.value = opt.value;
           option.textContent = opt.text;
           maritalStatusSelect.appendChild(option);
         });
+        maritalStatusSelect.required = true;
       } else {
         maritalStatusContainer.style.display = 'none';
+        maritalStatusSelect.required = false;
+        maritalStatusSelect.innerHTML = '';
       }
     });
 
+    // Show/hide children details on hasChildren change
     hasChildrenSelect.addEventListener('change', () => {
       if (hasChildrenSelect.value === 'ndiyo') {
         childrenDetailsContainer.style.display = 'block';
+        totalChildren.required = true;
+        boysCount.required = true;
+        girlsCount.required = true;
       } else {
         childrenDetailsContainer.style.display = 'none';
+        totalChildren.required = false;
+        boysCount.required = false;
+        girlsCount.required = false;
+        totalChildren.value = '';
+        boysCount.value = '';
+        girlsCount.value = '';
       }
     });
 
+    // Auto adjust boys/girls count when total changes
     totalChildren.addEventListener('input', () => {
-      const total = parseInt(totalChildren.value) || 0;
-      const boys = parseInt(boysCount.value) || 0;
+      const total = parseInt(totalChildren.value, 10) || 0;
+      const boys = parseInt(boysCount.value, 10) || 0;
       if (total >= boys) {
         girlsCount.value = total - boys;
+      } else {
+        girlsCount.value = '';
       }
     });
 
+    // Auto adjust girls count when boys count changes
     boysCount.addEventListener('input', () => {
-      const total = parseInt(totalChildren.value) || 0;
-      const boys = parseInt(boysCount.value) || 0;
+      const total = parseInt(totalChildren.value, 10) || 0;
+      const boys = parseInt(boysCount.value, 10) || 0;
       if (total >= boys) {
         girlsCount.value = total - boys;
+      } else {
+        girlsCount.value = '';
       }
     });
 
+    // Auto adjust boys count when girls count changes
     girlsCount.addEventListener('input', () => {
-      const total = parseInt(totalChildren.value) || 0;
-      const girls = parseInt(girlsCount.value) || 0;
+      const total = parseInt(totalChildren.value, 10) || 0;
+      const girls = parseInt(girlsCount.value, 10) || 0;
       if (total >= girls) {
         boysCount.value = total - girls;
+      } else {
+        boysCount.value = '';
       }
     });
 
+    // Show/hide Tanzania or outside address fields on country change
     countrySelect.addEventListener('change', () => {
       if (countrySelect.value === 'tanzania') {
         tanzaniaAddress.style.display = 'block';
         outsideAddress.style.display = 'none';
-      } else {
+        regionSelect.required = true;
+        districtSelect.required = true;
+        wardSelect.required = true;
+        document.getElementById('street').required = true;
+        document.getElementById('city').required = false;
+        document.getElementById('outsideCountry').required = false;
+      } else if (countrySelect.value === 'nje') {
         tanzaniaAddress.style.display = 'none';
         outsideAddress.style.display = 'block';
+        regionSelect.required = false;
+        districtSelect.required = false;
+        wardSelect.required = false;
+        document.getElementById('street').required = false;
+        document.getElementById('city').required = true;
+        document.getElementById('outsideCountry').required = true;
+      } else {
+        tanzaniaAddress.style.display = 'none';
+        outsideAddress.style.display = 'none';
       }
     });
 
+    // Load wilaya dynamically based on region
     regionSelect.addEventListener('change', () => {
-      districtSelect.innerHTML = '<option value="" disabled selected>Chagua wilaya</option>';
-      const wilayaList = dataWilaya[regionSelect.value] || [];
-      wilayaList.forEach(w => {
-        const option = document.createElement('option');
-        option.value = w;
-        option.textContent = w;
-        districtSelect.appendChild(option);
-      });
+      const region = regionSelect.value;
+      districtSelect.innerHTML =
+        '<option value="" disabled selected>Chagua wilaya</option>';
+      wardSelect.innerHTML = '<option value="" disabled selected>Chagua kata</option>';
+      if (region && dataWilaya[region]) {
+        dataWilaya[region].forEach((wilaya) => {
+          const option = document.createElement('option');
+          option.value = wilaya;
+          option.textContent = wilaya;
+          districtSelect.appendChild(option);
+        });
+      }
     });
 
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    // Load kata dynamically based on wilaya
+    districtSelect.addEventListener('change', () => {
+      const wilaya = districtSelect.value;
+      wardSelect.innerHTML = '<option value="" disabled selected>Chagua kata</option>';
+      if (wilaya && dataKata[wilaya]) {
+        dataKata[wilaya].forEach((kata) => {
+          const option = document.createElement('option');
+          option.value = kata;
+          option.textContent = kata;
+          wardSelect.appendChild(option);
+        });
+      }
+    });
+
+    // Validate children counts (boys + girls == total)
+    function validateChildrenCount() {
+      const total = parseInt(totalChildren.value, 10) || 0;
+      const boys = parseInt(boysCount.value, 10) || 0;
+      const girls = parseInt(girlsCount.value, 10) || 0;
+      return boys + girls === total;
+    }
+
+    // Form submit event
+    registrationForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      document.getElementById('successMessage').style.display = 'block';
-      this.reset();
+
+      // Check children count validation if user has children
+      if (
+        hasChildrenSelect.value === 'ndiyo' &&
+        !validateChildrenCount()
+      ) {
+        alert(
+          'Tafadhali hakikisha jumla ya watoto wa kiume na wa kike inalingana na idadi ya watoto jumla.'
+        );
+        return;
+      }
+
+      // If form is valid show success message
+      successMessage.style.display = 'block';
+
+      // Reset form after showing success message for 3 seconds
       setTimeout(() => {
+        successMessage.style.display = 'none';
+        registrationForm.reset();
+        // Redirect to login.html after reset
         window.location.href = 'login.html';
       }, 3000);
     });
-
-    function toggleMenu() {
-      document.getElementById('main-nav').classList.toggle('active');
-    }
   </script>
+
 </body>
+
 </html>
