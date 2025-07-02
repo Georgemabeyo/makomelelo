@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Umesahau Nenosiri?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to right, #002d10, #02931c);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 2000;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover,
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 60vw;
+        max-width: 300px;
+        background-color: rgba(1, 31, 2, 0.7);
+        padding-top: 60px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        flex-direction: column;
+        display: flex;
+        z-index: 1500;
+      }
+
+      nav.active {
+        transform: translateX(0);
+      }
+
+      nav a {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      nav a:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #02931c;
+    }
+
+    .form-container label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    .form-container input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .form-container .method-options {
+      margin-bottom: 15px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .form-container input[type="submit"] {
+      background-color: #02931c;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #017314;
+    }
+
+    .extra-links {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .extra-links a {
+      display: block;
+      margin: 8px 0;
+      color: #02931c;
+      text-decoration: none;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ukoo wa George</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="register.html">Jisajili</a>
+      <a href="login.html">Ingia</a>
+      <a href="events.html">Matukio</a>
+      <a href="family_tree.html">Ukoo</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h2>Rejesha Nenosiri</h2>
+
+      <div class="method-options">
+        <label>
+          <input type="radio" name="method" value="phone" checked onclick="toggleMethod()"> Tumia Namba ya Simu
+        </label>
+        <label>
+          <input type="radio" name="method" value="email" onclick="toggleMethod()"> Tumia Barua Pepe
+        </label>
+      </div>
+
+      <div id="phoneField">
+        <label for="phone">Namba ya Simu</label>
+        <input type="tel" id="phone" name="phone" placeholder="Eg. 0712345678" />
+      </div>
+
+      <div id="emailField" style="display:none;">
+        <label for="email">Barua Pepe</label>
+        <input type="email" id="email" name="email" placeholder="Eg. example@gmail.com" />
+      </div>
+
+      <input type="submit" value="Rejesha Nenosiri" onclick="redirectToLogin(event)" />
+
+      <div class="extra-links">
+        <a href="register.html">Jisajili mwanaukoo mpya</a>
+        <a href="login.html">Rudi ukurasa wa kuingia</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('active');
+    }
+
+    function toggleMethod() {
+      const method = document.querySelector('input[name="method"]:checked').value;
+      document.getElementById('phoneField').style.display = method === 'phone' ? 'block' : 'none';
+      document.getElementById('emailField').style.display = method === 'email' ? 'block' : 'none';
+    }
+
+    function redirectToLogin(event) {
+      event.preventDefault();
+      // Hapa unaweza kuongeza logic ya kutuma request kabla ya ku-redirect
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

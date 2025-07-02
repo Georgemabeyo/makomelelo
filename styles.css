@@ -1,0 +1,333 @@
+/* ======== GLOBAL RESET & BASE ======== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('background.png');
+    background-size: cover;
+    position: relative;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* 70% opacity overlay */
+    z-index: -1;
+  }
+  
+  /* ======== HEADER & NAVIGATION ======== */
+  header {
+    background: linear-gradient(to right, #002d10, #02931c);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 100;
+  }
+  
+  header h1 {
+    font-size: 22px;
+  }
+  
+  .menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 2000;
+  }
+  
+  nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav a:hover,
+  nav a.active {
+    text-decoration: underline;
+  }
+  
+  /* ======== MOBILE NAVIGATION ======== */
+  @media screen and (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+  
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 60vw;
+      max-width: 300px;
+      background-color: rgba(1, 31, 2, 0.7);
+      padding-top: 60px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      z-index: 1500;
+    }
+  
+    nav.active {
+      transform: translateX(0);
+    }
+  
+    nav a {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* ======== MAIN CONTENT ======== */
+  main {
+    flex: 1;
+    width: 100%;
+    padding: 30px 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  /* ======== FORM CONTAINER ======== */
+  .form-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    color: #02931c;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  .form-container label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    color: #333;
+  }
+  
+  .form-container input,
+  .form-container select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-container input:focus,
+  .form-container select:focus {
+    border-color: #02931c;
+    outline: none;
+  }
+  
+  .form-container input[type="submit"] {
+    background-color: #02931c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-container input[type="submit"]:hover {
+    background-color: #017314;
+  }
+  
+  .extra-links {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .extra-links a {
+    color: #02931c;
+    text-decoration: none;
+    margin: 0 10px;
+    display: inline-block;
+  }
+  
+  .extra-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ======== EVENTS PAGE ======== */
+  .events h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #02931c;
+  }
+  
+  .event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .event-card {
+    background-color: #f8f8f8;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow-wrap: break-word;
+  }
+  
+  .event-card h3 {
+    margin-bottom: 10px;
+    color: #004d18;
+    font-size: 20px;
+  }
+  
+  .event-card p {
+    font-size: 16px;
+    color: #333;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* ======== FAMILY TREE PAGE ======== */
+  .tree {
+    max-width: 400px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tree h2 {
+    color: #02931c;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  
+  /* ======== FOOTER ======== */
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  
+  /* ======== SMALL SCREEN FIXES ======== */
+  @media screen and (max-width: 480px) {
+    main {
+      padding: 20px 10px;
+    }
+  
+    .form-container {
+      padding: 20px;
+      margin: 20px 10px;
+    }
+  
+    .form-container input[type="submit"] {
+      font-size: 14px;
+      padding: 12px;
+    }
+  }
+
+  .back-button, .forward-button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .back-button {
+    left: 10px;
+  }
+  
+  .forward-button {
+    right: 10px;
+  }
+  
+  .back-button-area, .forward-button-area {
+    position: fixed;
+    top: 0;
+    width: 60px;
+    height: 100vh;
+    z-index: 9998;
+  }
+  
+  .back-button-area {
+    left: 0;
+  }
+  
+  .forward-button-area {
+    right: 0;
+  }
+  
+  /* Onyesha kitufe cha nyuma ukihover upande wa kushoto */
+  .back-button-area:hover + .back-button {
+    opacity: 1;
+  }
+  
+  /* Onyesha kitufe cha mbele ukihover upande wa kulia */
+  .forward-button-area:hover + .forward-button {
+    opacity: 1;
+  }
+  

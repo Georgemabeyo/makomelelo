@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jisajili - Ukoo wa Makomelelo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="datawilaya.js"></script>
+</head>
+
+
+<body>
+ <!-- Eneo la kushoto la hover -->
+<div class="back-button-area"></div>
+<a href="javascript:history.back()" class="back-button" title="Rudi Nyuma">◀</a>
+
+<!-- Eneo la kulia la hover -->
+<div class="forward-button-area"></div>
+<a href="javascript:history.forward()" class="forward-button" title="Nenda Mbele">▶</a>
+  <header>
+    <h1>Ukoo wa George</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="register.html" class="active">Jisajili</a>
+      <a href="login.html">Ingia</a>
+      <a href="events.html">Matukio</a>
+      <a href="family_tree.html">Mti wa Ukoo</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="form-container">
+      <form id="registrationForm" class="registration-form">
+        <h2>Jisajili</h2>
+
+        <label for="fullname">Jina Kamili</label>
+        <input type="text" id="fullname" name="fullname" required />
+
+        <label for="phone">Namba ya Simu</label>
+        <input type="text" id="phone" name="phone" required />
+
+        <label for="gender">Jinsia</label>
+        <select id="gender" name="gender" required>
+          <option value="" disabled selected>Chagua jinsia</option>
+          <option value="mwanaume">Mwanaume</option>
+          <option value="mwanamke">Mwanamke</option>
+        </select>
+
+        <div id="maritalStatusContainer" style="display:none;">
+          <label for="maritalStatus">Hali ya ndoa</label>
+          <select id="maritalStatus" name="maritalStatus">
+            <option value="" disabled selected>Chagua hali ya ndoa</option>
+          </select>
+        </div>
+
+        <div id="childrenContainer">
+          <label for="hasChildren">Je, una watoto?</label>
+          <select id="hasChildren" name="hasChildren">
+            <option value="" disabled selected>Chagua jibu</option>
+            <option value="ndiyo">Ndiyo</option>
+            <option value="hapana">Hapana</option>
+          </select>
+        </div>
+
+        <div id="childrenDetailsContainer" style="display:none;">
+          <label for="totalChildren">Idadi ya watoto (jumla)</label>
+          <input type="number" id="totalChildren" name="totalChildren" min="0" />
+
+          <label for="boysCount">Watoto wa kiume</label>
+          <input type="number" id="boysCount" name="boysCount" min="0" />
+
+          <label for="girlsCount">Watoto wa kike</label>
+          <input type="number" id="girlsCount" name="girlsCount" min="0" />
+        </div>
+
+        <label for="country">Nchi unayoishi</label>
+        <select id="country" name="country" required>
+          <option value="" disabled selected>Chagua nchi</option>
+          <option value="tanzania">Tanzania</option>
+          <option value="nje">Nje ya Tanzania</option>
+        </select>
+
+        <div id="tanzaniaAddress" style="display:none;">
+          <label for="region">Mkoa</label>
+          <select id="region" name="region">
+            <option value="" disabled selected>Chagua mkoa</option>
+            <option value="arusha">Arusha</option>
+            <option value="dar_es_salaam">Dar es Salaam</option>
+            <option value="dodoma">Dodoma</option>
+            <option value="geita">Geita</option>
+            <option value="iringa">Iringa</option>
+            <option value="kagera">Kagera</option>
+            <option value="katavi">Katavi</option>
+            <option value="kigoma">Kigoma</option>
+            <option value="kilimanjaro">Kilimanjaro</option>
+            <option value="lindi">Lindi</option>
+            <option value="manyara">Manyara</option>
+            <option value="mara">Mara</option>
+            <option value="mbeya">Mbeya</option>
+            <option value="morogoro">Morogoro</option>
+            <option value="mtwara">Mtwara</option>
+            <option value="mwanza">Mwanza</option>
+            <option value="njombe">Njombe</option>
+            <option value="pwani">Pwani</option>
+            <option value="rukwa">Rukwa</option>
+            <option value="ruvuma">Ruvuma</option>
+            <option value="shinyanga">Shinyanga</option>
+            <option value="singida">Singida</option>
+            <option value="tabora">Tabora</option>
+            <option value="tanga">Tanga</option>
+            <option value="zanzibar_north">Zanzibar Kaskazini</option>
+            <option value="zanzibar_south">Zanzibar Kusini</option>
+            <option value="zanzibar_west">Zanzibar Magharibi</option>
+            <option value="pemba_north">Pemba Kaskazini</option>
+            <option value="pemba_south">Pemba Kusini</option>
+          </select>
+
+          <label for="district">Wilaya</label>
+          <select id="district" name="district">
+            <option value="" disabled selected>Chagua wilaya</option>
+          </select>
+
+          <label for="ward">Kata (Andika)</label>
+          <input type="text" id="ward" name="ward" placeholder="Andika kata yako hapa" />
+
+          <label for="street">Mtaa/Kijiji (Andika)</label>
+          <input type="text" id="street" name="street" placeholder="Andika jina la mtaa au kijiji" />
+        </div>
+
+        <div id="outsideAddress" style="display:none;">
+          <label for="city">Jiji/Mji</label>
+          <input type="text" id="city" name="city" />
+
+          <label for="outsideCountry">Nchi</label>
+          <input type="text" id="outsideCountry" name="outsideCountry" />
+        </div>
+
+        <input type="submit" value="Jisajili" />
+        <center><a href="login.html" style="color:green;">Rudi Nyuma</a></center>
+      </form>
+
+      <div id="successMessage" style="display:none; color: green; margin-top: 10px;">
+        ✅ Hongera! Usajili wako umefanikiwa. Tafadhali ingia kwenye akaunti yako ili kuendelea.
+      </div>
+    </div>
+  </main>
+
+  
+
+  <script>
+    const genderSelect = document.getElementById('gender');
+    const maritalStatusContainer = document.getElementById('maritalStatusContainer');
+    const maritalStatusSelect = document.getElementById('maritalStatus');
+    const childrenContainer = document.getElementById('childrenContainer');
+    const hasChildrenSelect = document.getElementById('hasChildren');
+    const childrenDetailsContainer = document.getElementById('childrenDetailsContainer');
+    const totalChildren = document.getElementById('totalChildren');
+    const boysCount = document.getElementById('boysCount');
+    const girlsCount = document.getElementById('girlsCount');
+    const countrySelect = document.getElementById('country');
+    const tanzaniaAddress = document.getElementById('tanzaniaAddress');
+    const outsideAddress = document.getElementById('outsideAddress');
+    const regionSelect = document.getElementById('region');
+    const districtSelect = document.getElementById('district');
+
+    const maritalOptions = {
+      mwanaume: [
+        { value: 'Nimeoa', text: 'Nimeoa' },
+        { value: 'Sijaoa', text: 'Sijaoa' },
+        { value: 'Nimetarakiana', text: 'Nimetarakiana' }
+      ],
+      mwanamke: [
+        { value: 'Nimeolewa', text: 'Nimeolewa' },
+        { value: 'Sijaolewa', text: 'Sijaolewa' },
+        { value: 'Nimetarakiana', text: 'Nimetarakiana' }
+      ]
+    };
+
+    genderSelect.addEventListener('change', () => {
+      const gender = genderSelect.value;
+      if (gender) {
+        maritalStatusContainer.style.display = 'block';
+        maritalStatusSelect.innerHTML = '<option value="" disabled selected>Chagua hali ya ndoa</option>';
+        maritalOptions[gender].forEach(opt => {
+          const option = document.createElement('option');
+          option.value = opt.value;
+          option.textContent = opt.text;
+          maritalStatusSelect.appendChild(option);
+        });
+      } else {
+        maritalStatusContainer.style.display = 'none';
+      }
+    });
+
+    hasChildrenSelect.addEventListener('change', () => {
+      if (hasChildrenSelect.value === 'ndiyo') {
+        childrenDetailsContainer.style.display = 'block';
+      } else {
+        childrenDetailsContainer.style.display = 'none';
+      }
+    });
+
+    totalChildren.addEventListener('input', () => {
+      const total = parseInt(totalChildren.value) || 0;
+      const boys = parseInt(boysCount.value) || 0;
+      if (total >= boys) {
+        girlsCount.value = total - boys;
+      }
+    });
+
+    boysCount.addEventListener('input', () => {
+      const total = parseInt(totalChildren.value) || 0;
+      const boys = parseInt(boysCount.value) || 0;
+      if (total >= boys) {
+        girlsCount.value = total - boys;
+      }
+    });
+
+    girlsCount.addEventListener('input', () => {
+      const total = parseInt(totalChildren.value) || 0;
+      const girls = parseInt(girlsCount.value) || 0;
+      if (total >= girls) {
+        boysCount.value = total - girls;
+      }
+    });
+
+    countrySelect.addEventListener('change', () => {
+      if (countrySelect.value === 'tanzania') {
+        tanzaniaAddress.style.display = 'block';
+        outsideAddress.style.display = 'none';
+      } else {
+        tanzaniaAddress.style.display = 'none';
+        outsideAddress.style.display = 'block';
+      }
+    });
+
+    regionSelect.addEventListener('change', () => {
+      districtSelect.innerHTML = '<option value="" disabled selected>Chagua wilaya</option>';
+      const wilayaList = dataWilaya[regionSelect.value] || [];
+      wilayaList.forEach(w => {
+        const option = document.createElement('option');
+        option.value = w;
+        option.textContent = w;
+        districtSelect.appendChild(option);
+      });
+    });
+
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('successMessage').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 3000);
+    });
+
+    function toggleMenu() {
+      document.getElementById('main-nav').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

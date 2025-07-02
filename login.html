@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingia - Ukoo wa George</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Ukoo wa George</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="main-nav">
+          <a href="index.html">Nyumbani</a>
+          <a href="register.html">Jisajili</a>
+          <a href="login.html" class="active">Ingia</a>
+          <a href="events.html">Matukio</a>
+          <a href="family_tree.html">Ukoo</a>
+        </nav>
+      </header>
+  <main>
+    <div class="form-container login-form">
+      <h2>Ingia</h2>
+      <form>
+        <input type="text" placeholder="Jina la mtumiaji au barua pepe" required />
+        <input type="password" placeholder="Nenosiri" required />
+        <input type="submit" value="Ingia" />
+      </form>
+      <div class="extra-links">
+        <a href="register.html">Jisajili kama mwanaukoo mpya</a>
+        <a href="forgot.html">Umesahau nenosiri?</a>
+      </div>
+    </div>
+  </main>
+<script>function toggleMenu() {
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('overlay');
+  
+    nav.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+  
+  function closeMenu() {
+    document.getElementById('main-nav').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  }
+  </script>
+  
+</body>
+</html>

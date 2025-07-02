@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matukio ya Ukoo</title>
+  <style>
+    /* ======== GLOBAL RESET & BASE ======== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1740&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* ======== HEADER & NAVIGATION ======== */
+    header {
+      background: linear-gradient(to right, #002d10, #02931c);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover,
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    /* ======== MOBILE NAVIGATION ======== */
+    @media screen and (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        z-index: 2000;
+      }
+
+      nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100vh;
+          width: 50vw;
+          max-width: 300px;
+          background-color: rgba(1, 31, 2, 0.9);
+          padding-top: 60px;
+          box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+          z-index: 1500;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+      }
+      
+      nav.active {
+        transform: translateX(0);
+      }
+
+      nav a {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    /* ======== MAIN CONTENT ======== */
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 30px 16px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: transparent;
+    }
+
+    /* ======== EVENTS PAGE ======== */
+    .events {
+      width: 100%;
+      max-width: 1200px;
+    }
+    .events h2 {
+      text-align: center;
+      margin: 0 auto 30px auto;
+      max-width: 800px;
+      font-size: 28px;
+      color: #024a0f;
+      padding: 0 5%;
+      word-wrap: break-word;
+    }
+
+    .slide {
+      min-width: 300px;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin-right: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      flex-shrink: 0;
+      word-wrap: break-word;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      object-fit: cover;
+      height: 180px;
+    }
+
+    .slide h3 {
+      margin-bottom: 10px;
+      color: #004d18;
+      font-size: 20px;
+    }
+
+    .slide p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .slide:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    /* ======== FOOTER ======== */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    /* ======== SMALL SCREEN FIXES ======== */
+    @media screen and (max-width: 480px) {
+      main {
+        padding: 20px 10px;
+      }
+
+      .slide {
+        min-width: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ukoo wa Makomelelo</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="register.html">Jisajili</a>
+      <a href="login.html">Ingia</a>
+      <a href="events.html" class="active">Matukio</a>
+      <a href="family_tree.html">Ukoo</a>
+    </nav>
+  </header>
+
+  <main class="events">
+    <h2>Matukio ya Hivi Karibuni</h2><br>
+    <div class="slider-container">
+      <div class="slides">
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80" alt="Harusi ya John na Mary" />
+          <h3>Harusi ya John na Mary</h3>
+          <p>Tarehe: 10 Julai 2025</p>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=400&q=80" alt="Mkutano Mkuu wa Ukoo" />
+          <h3>Mkutano Mkuu wa Ukoo</h3>
+          <p>Tarehe: 1 December 2025</p>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Kumbukumbu ya Babu George" />
+          <h3>Kumbukumbu ya Makomelelo</h3>
+          <p>Tarehe: 15 Novemba 2025</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('active');
+    }
+
+    const slidesContainer = document.querySelector('.slides');
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+
+    function updateSlider() {
+      const slideWidth = slides[0].offsetWidth + 20; // slide width + margin
+      slidesContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    updateSlider();
+
+    setInterval(() => {
+      currentIndex++;
+      if (currentIndex >= slides.length) {
+        currentIndex = 0;
+      }
+      updateSlider();
+    }, 3000);
+</script>
+    // Session and inactivity check
+    If (sessionStorage.getItem("loggedIn") !== "true") {
+      alert("Huwezi kupata huduma katika ukurasa huu bila kuingia. Tafadhali ingia kwanza.");
+      window.location.href = "login.html";
+      // Zuia kurasa isiendelee kupakiwa
+      document.write(""); // Hii inafuta kilicho kwenye body
+    }
+
+    // Dakika 5 = 5 * 60 * 1000 = 300000 ms
+    let inactivityTime = function () {
+      let timer;
+      function logout() {
+        alert("Umeondolewa kwa sababu ya kutotumia mfumo kwa muda mrefu.");
+        sessionStorage.removeItem("loggedIn"); // futa session
+        window.location.href = "login.html"; // rudisha kwenye login
+      }
+  
+      function resetTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(logout, 5 * 60 * 1000); // 5 mins
+      }
+  
+      // Matukio ya kuonyesha activity
+      window.onload = resetTimer;
+      document.onmousemove = resetTimer;
+      document.onkeypress = resetTimer;
+      document.ontouchstart = resetTimer;
+      document.onclick = resetTimer;
+      document.onscroll = resetTimer;
+    };
+  
+    inactivityTime(); // Activate timer
+  </script>
+</body>
+</html>
