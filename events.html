@@ -263,39 +263,6 @@
       }
       updateSlider();
     }, 3000);
-</script>
-    // Session and inactivity check
-    If (sessionStorage.getItem("loggedIn") !== "true") {
-      alert("Huwezi kupata huduma katika ukurasa huu bila kuingia. Tafadhali ingia kwanza.");
-      window.location.href = "login.html";
-      // Zuia kurasa isiendelee kupakiwa
-      document.write(""); // Hii inafuta kilicho kwenye body
-    }
 
-    // Dakika 5 = 5 * 60 * 1000 = 300000 ms
-    let inactivityTime = function () {
-      let timer;
-      function logout() {
-        alert("Umeondolewa kwa sababu ya kutotumia mfumo kwa muda mrefu.");
-        sessionStorage.removeItem("loggedIn"); // futa session
-        window.location.href = "login.html"; // rudisha kwenye login
-      }
-  
-      function resetTimer() {
-        clearTimeout(timer);
-        timer = setTimeout(logout, 5 * 60 * 1000); // 5 mins
-      }
-  
-      // Matukio ya kuonyesha activity
-      window.onload = resetTimer;
-      document.onmousemove = resetTimer;
-      document.onkeypress = resetTimer;
-      document.ontouchstart = resetTimer;
-      document.onclick = resetTimer;
-      document.onscroll = resetTimer;
-    };
-  
-    inactivityTime(); // Activate timer
-  </script>
 </body>
 </html>
