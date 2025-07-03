@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maoni - Ukoo wa Makomelelo</title>
+  <link rel="stylesheet" href="feedback.css" />
+</head>
+<body>
+
+  <div id="overlay" onclick="closeMenu()"></div>
+
+  <header>
+    <h1>Toa Maoni Yako</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="dashboard.html">Dashibodi</a>
+      <a href="events.html">Matukio</a>
+      <a href="register.html">Jisajili</a>
+      <a href="family_tree.html">Ukoo</a>
+      <a href="feedback.html" class="active">Maoni</a>
+      <a href="about.html">Kuhusu</a>
+      <a href="logout.html">Toka</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Tuma Maoni</h2>
+    <p>Tuna furaha kusikia kutoka kwako. Tafadhali jaza fomu hapa chini:</p>
+
+    <form id="feedbackForm">
+      <label for="name">Jina lako:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Barua pepe:</label>
+      <input type="text" id="email" name="email" required />
+
+      <label for="message">Ujumbe:</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Andika maoni yako hapa..."></textarea>
+
+      <input type="submit" value="Tuma Maoni" />
+      <div id="feedbackSuccess">✅ Asante kwa maoni yako! Maoni yako yamefika na naamini yatafanyiwa kazi ipasavyo.</div>
+    </form>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      const overlay = document.getElementById('overlay');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('main-nav').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // Feedback submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('feedbackSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('feedbackSuccess').style.display = 'none';
+        document.getElementById('feedbackForm').reset();
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
