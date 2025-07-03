@@ -4,215 +4,267 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vizazi vya Ukoo - Ukoo wa Makomelelo</title>
+
   <style>
-    body {
-      height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    display: flex;
-    margin: 0;
+/* Global Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, #002d10, #02931c);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #014d0c;
+  text-decoration: none;
+}
+
+/* Menu toggle for mobile */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 2000;
+  color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+  #main-nav {
     flex-direction: column;
-    min-height: 100vh;
-    background: url('background.png');
-    background-size: cover;
-    position: relative;
-    }
-    .view-icon {
-      margin-left: 10px;
-      cursor: pointer;
-      color: #006400;
-      font-size: 18px;
-      user-select: none;
-      float: right;
+        background-color: rgba(1, 31, 2, 0.7);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 50vw;
+        max-width: 300px;
+        padding-top: 80px;
+        transform: translateX(-100%);
+        transition: transform 0.35s ease;
+        z-index: 2000;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+      }
+      nav#main-nav.active {
+        transform: translateX(0);
+      }
+
+      nav#main-nav a {
+        padding: 15px 20px;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
     }
 
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 3000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-    }
+/* Main tree section */
+main.tree {
+  background: rgba(255, 255, 255, 0.95);
+  max-width: 1100px;
+  margin: 20px auto 60px auto;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  flex-grow: 1;
+}
 
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 30px;
-      border: 1px solid #888;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    }
+/* Heading h2 */
+h2 {
+  text-align: center;
+  color: #021708;
+  font-size: 30px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
 
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* Accordion headings */
+.accordion h3, 
+.accordion h4, 
+.accordion h5, 
+.accordion h6, 
+.accordion .level7 {
+  cursor: pointer;
+  margin: 12px 0 8px 0;
+  color: #044013;
+  background: #82b18d;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  position: relative;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
 
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-    }
+.accordion h3:hover, 
+.accordion h4:hover, 
+.accordion h5:hover, 
+.accordion h6:hover, 
+.accordion .level7:hover {
+  background: #03691e;
+  color: white;
+}
 
-    header {
-      background: linear-gradient(to right, #002d10, #02931c);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 100;
-    }
+/* Sub lists styling */
+.accordion ul {
+  list-style: none;
+  margin-left: 20px;
+  padding-left: 18px;
+  border-left: 3px solid #5b1818;
+  display: none;
+}
 
-    header h1 {
-      font-size: 22px;
-    }
+.accordion ul.show {
+  display: block;
+}
 
-    nav {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+.accordion li {
+  margin: 6px 0;
+  padding: 6px 12px;
+  background: #f0f9f0;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.accordion li:not(:has(ul)) {
+  cursor: default;
+  background: #d8efd0;
+}
 
-    nav a:hover,
-    nav a.active {
-      text-decoration: underline;
-    }
-    .tree-box {
+/* Boxes for each member */
+.tree-box {
   display: inline-block;
   background-color: #fff;
   color: #333;
   border: 2px solid #5b1818;
-  padding: 6px 10px;
-  margin: 4px;
-  border-radius: 8px;
-  font-size: 14px;
-  max-width: 140px;
+  padding: 8px 12px;
+  margin: 6px 6px 6px 0;
+  border-radius: 10px;
+  font-size: 15px;
+  max-width: 150px;
   text-align: center;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease;
 }
 
 .tree-box:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
+  border-color: #0a3d06;
 }
 
-    main.tree {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-      background: rgba(255,255,255,0.9);
-      border-radius: 8px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #021708;
-      margin-bottom: 30px;
-      font-size: 28px;
-    }
-
-    .accordion h3, .accordion h4, .accordion h5, .accordion h6, .accordion .level7 {
-      cursor: pointer;
-      margin: 10px 0;
-      color: #044013;
-      background: #82b18d;
-      padding: 10px 15px;
-      border-radius: 6px;
-      transition: 0.3s ease;
-      user-select: none;
-      position: relative;
-    }
-
-    .accordion h3:hover, .accordion h4:hover, .accordion h5:hover, .accordion h6:hover, .accordion .level7:hover {
-      background: #03691e;
-    }
-
-    .accordion ul {
-      list-style: none;
-      margin-left: 20px;
-      padding-left: 15px;
-      border-left: 2px solid #ccc;
-      display: none;
-    }
-
-    .accordion ul.show {
-      display: block;
-    }
-
-    .accordion li {
-      margin: 6px 0;
-      padding: 6px 10px;
-      background: #ffffffc5;
-      border-radius: 5px;
-      position: relative;
-    }
-
-    .accordion li:not(:has(ul)) {
-      cursor: default;
-      background: #e0f0d8;
-    }
-
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      font-size: 14px;
-    }
-    /* Add this to your existing <style> section */
-.menu-toggle {
-    display: none;
-    font-size: 26px;
-    cursor: pointer;
-    z-index: 2000;
+/* Eye icon style */
+.view-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #006400;
+  font-size: 20px;
+  user-select: none;
+  float: right;
+  transition: color 0.3s ease;
 }
 
-@media screen and (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
+.view-icon:hover {
+  color: #004d00;
+}
 
-  #main-nav {
-    display: none;
-    flex-direction: column;
-    background: #012f10;
-    opacity: 0.9;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 50vw;
-    height: 100vh;
-    padding: 20px;
-    z-index: 2000;
-  }
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+}
 
-  #main-nav a {
-    padding: 10px 0;
-    border-bottom: 1px solid #fff;
-  }
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  max-width: 520px;
+  position: relative;
+  font-size: 16px;
+  color: #022b00;
+}
 
-  #main-nav.active {
-    display: flex;
-  }
+.close {
+  color: #888;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
 }
 
   </style>
@@ -222,7 +274,7 @@
   <header>
     <h1>Ukoo wa Makomelelo</h1>
     <!-- Add inside <header> before <nav> -->
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
     <nav id="main-nav">
       <a href="index.html">Nyumbani</a>
@@ -231,344 +283,704 @@
       <a href="events.html">Matukio</a>
       <a href="family_tree.html">Ukoo</a>
     </nav>
-</header>
+  </header>
   <main class="tree">
     <h2>Gusa jina la mwanaukoo ili kupata taarifa za watoto wake na gusa alama ya jicho uweze kupata taarifa zake muhimu</h2>
     <div class="accordion">
-        <h3 onclick="toggleList(this)">Makomelelo 
-          <span class="view-icon" onclick="showDetails(event, 'Makomelelo')">👁️‍🗨️</span>
-        </h3>
-        <ul>
-          <li>
-            <h4 onclick="toggleList(this)">Lucas
-              <span class="view-icon" onclick="showDetails(event, 'Lucas')">👁️‍🗨️</span>
-            </h4>
-            <ul>
-              <li>
-                <h5 onclick="toggleList(this)">John
-                  <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
-                </h5>
-                <ul>
-                  <li>
-                    <h6 onclick="toggleList(this)">David
-                      <span class="view-icon" onclick="showDetails(event, 'David')">👁️‍🗨️</span>
-                    </h6>
-                    <ul>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                        <ul>
-                          <li>Hope</li>
-                          <li>Joy</li>
-                          <li>Peace</li>
-                          <li>Love</li>
-                          <li>Truth</li>
-                          <li>Unity</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <h5 onclick="toggleList(this)">Sabho
-                  <span class="view-icon" onclick="showDetails(event, 'Sabho')">👁️‍🗨️</span>
-                </h5>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h4 onclick="toggleList(this)">Seleman
-              <span class="view-icon" onclick="showDetails(event, 'Seleman')">👁️‍🗨️</span>
-            </h4>
-            <ul>
-              <li>
-                <h5 onclick="toggleList(this)">Juma
-                  <span class="view-icon" onclick="showDetails(event, 'Juma')">👁️‍🗨️</span>
-                </h5>
-                <ul>
-                  <li>
-                    <h6 onclick="toggleList(this)">Rehema
-                      <span class="view-icon" onclick="showDetails(event, 'Rehema')">👁️‍🗨️</span>
-                    </h6>
-                    <ul>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Furaha
-                          <span class="view-icon" onclick="showDetails(event, 'Furaha')">👁️‍🗨️</span>
-                        </div>
-                        <ul>
-                          <li>Angela</li>
-                          <li>James</li>
-                          <li>Leah</li>
-                          <li>Joseph</li>
-                          <li>Daniel</li>
-                          <li>Sara</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <h5 onclick="toggleList(this)">John
-                  <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
-                </h5>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h4 onclick="toggleList(this)">George
-              <span class="view-icon" onclick="showDetails(event, 'George')">👁️‍🗨️</span>
-            </h4>
-            <ul>
-              <li>
-                <h5 onclick="toggleList(this)">Kefa
-                  <span class="view-icon" onclick="showDetails(event, 'Kefa')">👁️‍🗨️</span>
-                </h5>
-                <ul>
-                  <li>
-                    <h6 onclick="toggleList(this)">Baraka
-                      <span class="view-icon" onclick="showDetails(event, 'Baraka')">👁️‍🗨️</span>
-                    </h6>
-                    <ul>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Zawadi
-                          <span class="view-icon" onclick="showDetails(event, 'Zawadi')">👁️‍🗨️</span>
-                        </div>
-                        <ul>
-                          <li>Neema</li>
-                          <li>Joyce</li>
-                          <li>Eliza</li>
-                          <li>Mike</li>
-                          <li>Clara</li>
-                          <li>Brian</li>
-                          <li><strong><a href="#" style="color:blue">Ongeza Mtoto</a></strong></li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <h5 onclick="toggleList(this)">John
-                  <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
-                </h5>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h4 onclick="toggleList(this)">Costantine
-              <span class="view-icon" onclick="showDetails(event, 'Costantine')">👁️‍🗨️</span>
-            </h4>
-            <ul>
-              <li>
-                <h5 onclick="toggleList(this)">Victor
-                  <span class="view-icon" onclick="showDetails(event, 'Victor')">👁️‍🗨️</span>
-                </h5>
-                <ul>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                    <ul>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Lilian
-                          <span class="view-icon" onclick="showDetails(event, 'Lilian')">👁️‍🗨️</span>
-                        </div>
-                        <ul>
-                          <li>Eva</li>
-                          <li>Joash</li>
-                          <li>Peter</li>
-                          <li>Sofia</li>
-                          <li>Joshua</li>
-                          <li>Betty</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <h5 onclick="toggleList(this)">John
-                  <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
-                </h5>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h4 onclick="toggleList(this)">Benedictor
-              <span class="view-icon" onclick="showDetails(event, 'Benedictor')">👁️‍🗨️</span>
-            </h4>
-            <ul>
-              <li>
-                <h5 onclick="toggleList(this)">Victor
-                  <span class="view-icon" onclick="showDetails(event, 'Victor')">👁️‍🗨️</span>
-                </h5>
-                <ul>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                    <ul>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Lilian
-                          <span class="view-icon" onclick="showDetails(event, 'Lilian')">👁️‍🗨️</span>
-                        </div>
-                        <ul>
-                          <li>Eva</li>
-                          <li>Joash</li>
-                          <li>Peter</li>
-                          <li>Sofia</li>
-                          <li>Joshua</li>
-                          <li>Betty</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="level7" onclick="toggleList(this)">Grace
-                          <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <h6 onclick="toggleList(this)">Joseph
-                      <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
-                    </h6>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <h5 onclick="toggleList(this)">John
-                  <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
-                </h5>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      
-      <script>
-        function toggleList(element) {
-          const next = element.nextElementSibling;
-          if (next && next.tagName === 'UL') {
-            next.classList.toggle('show');
-          }
-        }
-      
-        function showDetails(event, name) {
-          event.stopPropagation();
-          alert('Taarifa za: ' + name);
-          // Hapa unaweza kuonyesha modal au data zaidi kama unavyotaka
-        }
-      </script>
-      
-      <style>
-        .view-icon {
-          margin-left: 10px;
-          cursor: pointer;
-          color: #006400;
-          font-size: 18px;
-          user-select: none;
-        }
-        ul.show {
-          display: block;
-        }
-      </style> 
-</main> <!-- Hapa unaendelea na mti wa ukoo kama kawaida -->
+      <h3 onclick="toggleList(this)">Makomelelo 
+        <span class="view-icon" onclick="showDetails(event, 'Makomelelo')">👁️‍🗨️</span>
+      </h3>
+      <ul>
+        <li>
+  <h4 onclick="toggleList(this)">Nyabhusu
+    <span class="view-icon" onclick="showDetails(event, 'Nyabhusu')">👁️‍🗨️</span>
+  </h4>
+  <ul>
+    <li>
+      <h5 onclick="toggleList(this)">Joseph
+        <span class="view-icon" onclick="showDetails(event, 'Joseph (mtoto wa Nyabhusu)')">👁️‍🗨️</span>
+      </h5>
+      <ul>
+        <li>
+          <h6 onclick="toggleList(this)">Moses
+            <span class="view-icon" onclick="showDetails(event, 'Moses')">👁️‍🗨️</span>
+          </h6>
+          <ul>
+            <li>Anna</li>
+            <li>David</li>
+            <li>Mary</li>
+          </ul>
+        </li>
+        <li>
+          <h6 onclick="toggleList(this)">Peter
+            <span class="view-icon" onclick="showDetails(event, 'Peter')">👁️‍🗨️</span>
+          </h6>
+          <ul>
+            <li>Rachel</li>
+            <li>James</li>
+            <li>Sarah</li>
+          </ul>
+        </li>
+        <li>
+          <h6 onclick="toggleList(this)">Samuel
+            <span class="view-icon" onclick="showDetails(event, 'Samuel')">👁️‍🗨️</span>
+          </h6>
+          <ul>
+            <li>Grace</li>
+            <li>John</li>
+            <li>Esther</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h5 onclick="toggleList(this)">Martha
+        <span class="view-icon" onclick="showDetails(event, 'Martha')">👁️‍🗨️</span>
+      </h5>
+    </li>
+    <li>
+      <h5 onclick="toggleList(this)">David
+        <span class="view-icon" onclick="showDetails(event, 'David (mtoto wa Nyabhusu)')">👁️‍🗨️</span>
+      </h5>
+    </li>
+  </ul>
+</li>
 
-  <!-- Modal ya Maelezo -->
+        <li>
+          <h4 onclick="toggleList(this)">Lucas
+            <span class="view-icon" onclick="showDetails(event, 'Lucas')">👁️‍🗨️</span>
+          </h4>
+          <ul>
+            <li>
+              <h5 onclick="toggleList(this)">John
+                <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">David
+                    <span class="view-icon" onclick="showDetails(event, 'David')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Grace
+                        <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
+                      </div>
+                      <ul>
+                        <li>Hope</li>
+                        <li>Joy</li>
+                        <li>Peace</li>
+                        <li>Love</li>
+                        <li>Truth</li>
+                        <li>Unity</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Grace
+                        <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">Sabho
+                <span class="view-icon" onclick="showDetails(event, 'Sabho')">👁️‍🗨️</span>
+              </h5>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4 onclick="toggleList(this)">Seleman
+            <span class="view-icon" onclick="showDetails(event, 'Seleman')">👁️‍🗨️</span>
+          </h4>
+          <ul>
+            <li>
+              <h5 onclick="toggleList(this)">Shoma
+                <span class="view-icon" onclick="showDetails(event, 'Shoma')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">Vicent
+                    <span class="view-icon" onclick="showDetails(event, 'Vicent')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Daniel
+                        <span class="view-icon" onclick="showDetails(event, 'Daniel')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Monica
+                        <span class="view-icon" onclick="showDetails(event, 'Monica')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Regina
+                        <span class="view-icon" onclick="showDetails(event, 'Regina')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Teddy
+                        <span class="view-icon" onclick="showDetails(event, 'Teddy')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Daudi
+                        <span class="view-icon" onclick="showDetails(event, 'Daudi')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Seleman
+                    <span class="view-icon" onclick="showDetails(event, 'Seleman')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Miliam
+                        <span class="view-icon" onclick="showDetails(event, 'Miliam')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Josia
+                    <span class="view-icon" onclick="showDetails(event, 'Josia')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Elian
+                        <span class="view-icon" onclick="showDetails(event, 'Elian')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Eliana
+                        <span class="view-icon" onclick="showDetails(event, 'Eliana')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Eliwinner
+                        <span class="view-icon" onclick="showDetails(event, 'Eliwinner')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Boaz
+                    <span class="view-icon" onclick="showDetails(event, 'Boaz')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Christian
+                        <span class="view-icon" onclick="showDetails(event, 'Christian')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Festus
+                        <span class="view-icon" onclick="showDetails(event, 'Festus')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Robert
+                        <span class="view-icon" onclick="showDetails(event, 'Robert')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Teddy
+                        <span class="view-icon" onclick="showDetails(event, 'Teddy')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Daud
+                        <span class="view-icon" onclick="showDetails(event, 'Daud')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Esau
+                    <span class="view-icon" onclick="showDetails(event, 'Esau')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Risper
+                        <span class="view-icon" onclick="showDetails(event, 'Risper')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Whisper
+                        <span class="view-icon" onclick="showDetails(event, 'Whisper')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Chrisper
+                        <span class="view-icon" onclick="showDetails(event, 'Chrisper')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Emmanuel
+                    <span class="view-icon" onclick="showDetails(event, 'Emmanuel')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Diana
+                        <span class="view-icon" onclick="showDetails(event, 'Diana')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">John
+                        <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">George
+                    <span class="view-icon" onclick="showDetails(event, 'George (mtoto wa Shoma)')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+                <li>
+                  <div class="level7" onclick="toggleList(this)">Kephlen
+                    <span class="view-icon" onclick="showDetails(event, 'Kephlen')">👁️‍🗨️</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Elen
+                        <span class="view-icon" onclick="showDetails(event, 'Elen')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Daniel
+                        <span class="view-icon" onclick="showDetails(event, 'Daniel')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Japhet
+                    <span class="view-icon" onclick="showDetails(event, 'Japhet')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+              </ul>
+              
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">Juma
+                <span class="view-icon" onclick="showDetails(event, 'Juma')">👁️‍🗨️</span>
+              </h5>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">Ndabacha
+                <span class="view-icon" onclick="showDetails(event, 'Ndabacha')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">Amos (mzee)
+                    <span class="view-icon" onclick="showDetails(event, 'Amos (mzee)')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Eva
+                        <span class="view-icon" onclick="showDetails(event, 'Eva')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">JinaJipya1
+                        <span class="view-icon" onclick="showDetails(event, 'JinaJipya1')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">JinaJipya2
+                        <span class="view-icon" onclick="showDetails(event, 'JinaJipya2')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <h6 onclick="toggleList(this)">Diana
+                    <span class="view-icon" onclick="showDetails(event, 'Amos (mzee)')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Ndabacha
+                        <span class="view-icon" onclick="showDetails(event, 'Ndabacha')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Suzy
+                        <span class="view-icon" onclick="showDetails(event, 'Suzy')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Sami
+                    <span class="view-icon" onclick="showDetails(event, 'Amos (mzee)')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Mariam (Nkanyi)
+                    <span class="view-icon" onclick="showDetails(event, 'Amos (mzee)')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Japhet
+                        <span class="view-icon" onclick="showDetails(event, 'Japhet')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Festo
+                        <span class="view-icon" onclick="showDetails(event, 'Festo')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Irene
+                        <span class="view-icon" onclick="showDetails(event, 'Irene')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Isack
+                        <span class="view-icon" onclick="showDetails(event, 'Isack')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <h6 onclick="toggleList(this)">Makomelelo
+                    <span class="view-icon" onclick="showDetails(event, 'Makomelelo')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7">
+                        Dominick
+                        <span class="view-icon" onclick="showDetails(event, {
+                          name: 'Dominick Makomelelo Kaloya',
+                          dob: '01 Januari 2010',
+                          gender: 'Mwanaume',
+                          address: 'mwanza',
+                          status: 'Geita'
+                        })">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                    
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Daniel
+                        <span class="view-icon" onclick="showDetails(event, 'Daniel')">👁️‍🗨️</span>
+                      </div>
+                      <!-- Hakuna watoto sasa hivi -->
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <div class="level7" onclick="toggleList(this)">JinaJipya1
+                    <span class="view-icon" onclick="showDetails(event, 'JinaJipya1')">👁️‍🗨️</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="level7" onclick="toggleList(this)">JinaJipya2
+                    <span class="view-icon" onclick="showDetails(event, 'JinaJipya2')">👁️‍🗨️</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            
+            <li>
+              <h5 onclick="toggleList(this)">George
+                <span class="view-icon" onclick="showDetails(event, 'George')">👁️‍🗨️</span>
+              </h5>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">Michael
+                <span class="view-icon" onclick="showDetails(event, 'Michael')">👁️‍🗨️</span>
+              </h5>
+            </li>
+          </ul>
+          
+          <h4 onclick="toggleList(this)">George
+            <span class="view-icon" onclick="showDetails(event, 'George')">👁️‍🗨️</span>
+          </h4>
+          <ul>
+            <li>
+              <h5 onclick="toggleList(this)">Kefa
+                <span class="view-icon" onclick="showDetails(event, 'Kefa')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">Baraka
+                    <span class="view-icon" onclick="showDetails(event, 'Baraka')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Zawadi
+                        <span class="view-icon" onclick="showDetails(event, 'Zawadi')">👁️‍🗨️</span>
+                      </div>
+                      <ul>
+                        <li>Neema</li>
+                        <li>Joyce</li>
+                        <li>Eliza</li>
+                        <li>Mike</li>
+                        <li>Clara</li>
+                        <li>Brian</li>
+                        <li><strong><a href="#" style="color:blue">Ongeza Mtoto</a></strong></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Grace
+                        <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">John
+                <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
+              </h5>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4 onclick="toggleList(this)">Costantine
+            <span class="view-icon" onclick="showDetails(event, 'Costantine')">👁️‍🗨️</span>
+          </h4>
+          <ul>
+            <li>
+              <h5 onclick="toggleList(this)">Victor
+                <span class="view-icon" onclick="showDetails(event, 'Victor')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Lilian
+                        <span class="view-icon" onclick="showDetails(event, 'Lilian')">👁️‍🗨️</span>
+                      </div>
+                      <ul>
+                        <li>Eva</li>
+                        <li>Joash</li>
+                        <li>Peter</li>
+                        <li>Sofia</li>
+                        <li>Joshua</li>
+                        <li>Betty</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Grace
+                        <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">John
+                <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
+              </h5>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4 onclick="toggleList(this)">Benedictor
+            <span class="view-icon" onclick="showDetails(event, 'Benedictor')">👁️‍🗨️</span>
+          </h4>
+          <ul>
+            <li>
+              <h5 onclick="toggleList(this)">Victor
+                <span class="view-icon" onclick="showDetails(event, 'Victor')">👁️‍🗨️</span>
+              </h5>
+              <ul>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                  <ul>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Lilian
+                        <span class="view-icon" onclick="showDetails(event, 'Lilian')">👁️‍🗨️</span>
+                      </div>
+                      <ul>
+                        <li>Eva</li>
+                        <li>Joash</li>
+                        <li>Peter</li>
+                        <li>Sofia</li>
+                        <li>Joshua</li>
+                        <li>Betty</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="level7" onclick="toggleList(this)">Grace
+                        <span class="view-icon" onclick="showDetails(event, 'Grace')">👁️‍🗨️</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <h6 onclick="toggleList(this)">Joseph
+                    <span class="view-icon" onclick="showDetails(event, 'Joseph')">👁️‍🗨️</span>
+                  </h6>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h5 onclick="toggleList(this)">John
+                <span class="view-icon" onclick="showDetails(event, 'John')">👁️‍🗨️</span>
+              </h5>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Ukoo wa Makomelelo. Haki zote zimehifadhiwa.
+  </footer>
+
+  <!-- Modal HTML -->
   <div id="detailsModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="modalName">Jina</h3>
-      <p><strong>Tarehe ya kuzaliwa:</strong> <span id="dob">Haijajazwa</span></p>
-      <p><strong>Jinsia:</strong> <span id="gender">Haijajazwa</span></p>
-      <p><strong>Anuani:</strong> <span id="address">Haijajazwa</span></p>
-      <p><strong>Msimamo:</strong> <span id="status">Haijajazwa</span></p>
+      <h3 id="modalTitle">Jina</h3>
+      <p id="modalContent">Maelezo ya mtu yatakuja hapa.</p>
     </div>
   </div>
 
   <script>
+    // Toggle submenu visibility
     function toggleList(element) {
-      const next = element.nextElementSibling;
-      if (next && next.tagName === 'UL') {
-        next.classList.toggle('show');
+      const nextUl = element.nextElementSibling;
+      if (!nextUl) return;
+      if (nextUl.classList.contains('show')) {
+        nextUl.classList.remove('show');
+      } else {
+        nextUl.classList.add('show');
       }
     }
 
+    // Prevent click on icon from toggling parents
     function showDetails(event, name) {
       event.stopPropagation();
-      document.getElementById('modalName').innerText = name;
-      document.getElementById('dob').innerText = "01 Januari 1970";
-      document.getElementById('gender').innerText = "Mwanaume";
-      document.getElementById('address').innerText = "Dodoma";
-      document.getElementById('status').innerText = "Hai";
-      document.getElementById('detailsModal').style.display = 'block';
+      const modal = document.getElementById('detailsModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+
+      // Sample data for demonstration, replace or expand as needed
+      const data = {
+        'Makomelelo': 'Makomelelo ni mzazi wa kizazi cha kwanza cha familia yetu. Alizaliwa mwaka 1870 alikufa akiwa na umri wa miaka 70 mwaka 1940 huko mwanza, kaburi lake lipo masanza kona.',
+        'Lucas': 'Lucas ni mtoto wa Makomelelo, anajulikana kwa ujasiri wake.',
+        'John': 'John ni mtoto wa Lucas, anapenda sana sanaa na muziki.',
+        'David': 'David ni mtoto wa John, anafanya kazi kama mhandisi.',
+        'Grace': 'Grace ni mtoto wa David, ana watoto sita: Hope, Joy, Peace, Love, Truth, Unity.',
+        'Joseph': 'Joseph ni mtoto wa John, anapenda michezo.',
+        'Sabho': 'Sabho ni mtoto wa Lucas, anaishi mikoani.',
+        'Seleman': 'Seleman ni mtoto wa Makomelelo, anapenda kilimo.',
+        'Shoma': 'Shoma ni mtoto wa Seleman, ana watoto wengi.',
+        'Vicent': 'Vicent ni mtoto wa Shoma, anapenda kusoma.',
+        'Daniel': 'Daniel ni mtoto wa Vicent, ni daktari.',
+        'Monica': 'Monica ni mtoto wa Vicent, ni mwalimu.',
+        'Regina': 'Regina ni mtoto wa Vicent, anapenda kusafiri.',
+        'Teddy': 'Teddy ni mtoto wa Vicent, ni mchoraji.',
+        'Daudi': 'Daudi ni mtoto wa Vicent, ni mkulima.',
+        'Miliam': 'Miliam ni mtoto wa Seleman, ni mfanyakazi wa serikalini.',
+        'Josia': 'Josia ni mtoto wa Seleman, anapenda muziki.',
+        'Elian': 'Elian ni mtoto wa Josia.',
+        'Eliana': 'Eliana ni mtoto wa Josia.',
+        'Eliwinner': 'Eliwinner ni mtoto wa Josia.',
+        'Boaz': 'Boaz ni mtoto wa Seleman, ana watoto watano.',
+        'Christian': 'Christian ni mtoto wa Boaz.',
+        'Festus': 'Festus ni mtoto wa Boaz alizaliwa tarehe 1 january 2013 Kasilo nyantakara Biharamulo.',
+        'Robert': 'Robert ni mtoto wa Boaz.',
+        'Daud': 'Daud ni mtoto wa Boaz.',
+        'Esau': 'Esau ni mtoto wa Seleman.',
+        'Risper': 'Risper ni mtoto wa Esau.',
+        'Whisper': 'Whisper ni mtoto wa Esau.',
+        'Chrisper': 'Chrisper ni mtoto wa Esau.',
+        'Emmanuel': 'Emmanuel ni mtoto wa Seleman.',
+        'Diana': 'Diana ni mtoto wa Emmanuel.',
+        'John (mtoto wa Emmanuel)': 'John ni mtoto wa Emmanuel.',
+        'George (mtoto wa Shoma)': 'George ni mtoto wa Shoma.',
+        'Kephlen': 'Kephlen ni mtoto wa Shoma.',
+        'Elen': 'Elen ni mtoto wa Kephlen.',
+        'Daniel (mtoto wa Kephlen)': 'Daniel ni mtoto wa Kephlen.',
+        'Japhet': 'Japhet ni mtoto wa Shoma.',
+        'Juma': 'Juma ni mtoto wa Seleman.',
+        'George (mtoto wa Makomelelo)': 'George ni mtoto wa Makomelelo.',
+        'Lucas (mtoto wa George)': 'Lucas ni mtoto wa George.',
+        'Joseph (mtoto wa Lucas)': 'Joseph ni mtoto wa Lucas.',
+        'James': 'James ni mtoto wa Lucas.',
+        'Mark': 'Mark ni mtoto wa Lucas.',
+        'Paul': 'Paul ni mtoto wa Lucas.',
+        'Simon': 'Simon ni mtoto wa Lucas.',
+        'Peter': 'Peter ni mtoto wa George.',
+        'Philip': 'Philip ni mtoto wa Peter.',
+        'Bartholomew': 'Bartholomew ni mtoto wa Peter.',
+        'Thomas': 'Thomas ni mtoto wa Peter.',
+        'Matthew': 'Matthew ni mtoto wa Peter.',
+        'Andrew': 'Andrew ni mtoto wa Peter.',
+        'Constantine': 'Constantine ni mtoto wa Makomelelo.',
+        'Aaron': 'Aaron ni mtoto wa Constantine.',
+        'Gabriel': 'Gabriel ni mtoto wa Nyabhusu.',
+        'Malik': 'Malik ni mtoto wa Kulwa.',
+        'Reuben': 'Reuben ni mtoto wa Dotto.',
+      };
+
+      modalTitle.textContent = name;
+      modalContent.textContent = data[name] || 'Hakuna taarifa zaidi kwa jina hili.';
+      modal.style.display = 'block';
     }
 
     function closeModal() {
-      document.getElementById('detailsModal').style.display = 'none';
+      const modal = document.getElementById('detailsModal');
+      modal.style.display = 'none';
     }
 
+    // Close modal if user clicks outside modal content
     window.onclick = function(event) {
       const modal = document.getElementById('detailsModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
+      if (event.target === modal) {
+        closeModal();
       }
     }
+
+    // Toggle mobile menu
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('active');
+    }
   </script>
-      <script>
-        function toggleMenu() {
-          const nav = document.getElementById('main-nav');
-          nav.classList.toggle('active');
-        }
-      </script>
-      <script>
-        function toggleMenu() {
-          const nav = document.getElementById('main-nav');
-          nav.classList.toggle('active');
-        }
-      </script>
 </body>
 </html>
