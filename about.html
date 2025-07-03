@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kuhusu - Ukoo wa Makomelelo</title>
+  <style>
+    /* Global Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+    /* Header */
+    header {
+      background: linear-gradient(to right, #004d00, #008000);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: #003300;
+    }
+
+    /* Menu toggle for mobile */
+    .menu-toggle {
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        background: rgba(0, 68, 0, 0.95);
+        height: 100vh;
+        width: 50vw;
+        flex-direction: column;
+        padding: 25px 20px;
+        gap: 20px;
+        overflow-y: auto;
+        z-index: 1100;
+      }
+      nav.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Main content */
+    main {
+      background: rgba(255, 255, 255, 0.95);
+      max-width: 960px;
+      margin: 30px auto 50px auto;
+      padding: 35px 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      flex-grow: 1;
+    }
+
+    main h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #064906;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    main p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    main ul {
+      margin-left: 30px;
+      margin-bottom: 40px;
+      font-size: 17px;
+      list-style-type: disc;
+    }
+
+    main ul li {
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #2c5f2d;
+      font-weight: 700;
+    }
+
+    /* Leaders container */
+    .leaders-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+    }
+
+    .leader-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      text-align: center;
+      width: 280px;
+      transition: transform 0.3s ease;
+    }
+
+    .leader-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .leader-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #4caf50;
+      margin-bottom: 15px;
+      box-shadow: 0 0 8px rgba(76,175,80,0.6);
+    }
+
+    .leader-card h4 {
+      color: #2c5f2d;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .leader-card p {
+      margin: 4px 0;
+      color: #333;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ukoo wa Makomelelo</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="dashboard.html">Dashibodi</a>
+      <a href="events.html">Matukio</a>
+      <a href="register.html">Jisajili</a>
+      <a href="family_tree.html">Mti wa Ukoo</a>
+      <a href="feedback.html">Maoni</a>
+      <a href="about.html" class="active">Kuhusu</a>
+      <a href="logout.html">Toka</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Karibu kwenye Mfumo wa Ukoo wa Makomelelo</h2>
+    <p>
+      Mfumo huu umetengenezwa kwa lengo la kurahisisha mawasiliano, usajili wa wanaukoo, na kuhifadhi historia ya familia ya Makomelelo.
+      Unaruhusu kila mwanafamilia kujisajili, kuona mti wa ukoo, matukio ya familia, na kutoa maoni kuhusu maendeleo ya ukoo.
+    </p>
+
+    <h3>Malengo ya Mfumo</h3>
+    <ul>
+      <li>Kuunganisha wanafamilia wote popote walipo duniani</li>
+      <li>Kuhifadhi kumbukumbu za wanaukoo na vizazi</li>
+      <li>Kuwezesha ushiriki wa wanaukoo kwenye shughuli mbalimbali</li>
+      <li>Kuratibu matukio ya kifamilia kwa urahisi</li>
+    </ul>
+
+    <h3>Viongozi wa Ukoo</h3>
+
+    <div class="leaders-container">
+      <div class="leader-card">
+        <img src="mfumo.jpg" alt="Mwenyekiti" />
+        <h4>Mzee George Makomelelo</h4>
+        <p><strong>Cheo:</strong> Mwenyekiti</p>
+        <p><strong>Simu:</strong> +255 712 345 678</p>
+      </div>
+
+      <div class="leader-card">
+        <img src="mfumo1.jpg" alt="Katibu" />
+        <h4>Neema Makomelelo</h4>
+        <p><strong>Cheo:</strong> Katibu</p>
+        <p><strong>Simu:</strong> +255 713 987 654</p>
+      </div>
+
+      <div class="leader-card">
+        <img src="mfumo2.jpg" alt="Mweka Hazina" />
+        <h4>Lucas Makomelelo</h4>
+        <p><strong>Cheo:</strong> Mweka Hazina</p>
+        <p><strong>Simu:</strong> +255 714 321 987</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("main-nav").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
