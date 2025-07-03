@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <style>
+  /* ======== BASE RESET ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c5f2d;
+  min-height: 100vh;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ======== HEADER ======== */
+header {
+  background: linear-gradient(to right, #002d10, #02931c);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  flex-wrap: wrap;
+    position: relative;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* ======== NAVIGATION (SLIDE TOGGLE) ======== */
+.menu-toggle {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  color: white;
+  user-select: none;
+}
+
+nav#main-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav#main-nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+nav#main-nav a:hover,
+nav#main-nav a.active {
+  background-color: #1f3b1f;
+}
+
+/* ======== MAIN DASHBOARD ======== */
+main {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+  flex: 1;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #025005;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* ======== GRID OF DASHBOARD BOXES ======== */
+.dashboard-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-links a {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #4caf50;
+  padding: 25px 20px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: #025005;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-links a:hover {
+  background-color: #eaffea;
+  transform: scale(1.03);
+}
+
+/* ======== RESPONSIVE NAVIGATION ======== */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav#main-nav {
+    flex-direction: column;
+    background-color: rgba(1, 31, 2, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    max-width: 300px;
+    height: 100vh;
+    padding-top: 80px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.25);
+  }
+
+  nav#main-nav.active {
+    transform: translateX(0);
+  }
+
+  nav#main-nav a {
+    font-size: 18px;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dashboard - Ukoo wa Makomelelo</title>
+</head>
+<body>
+
+  <header>
+    <h1>dashboard</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="events.html">Matukio</a>
+      <a href="register.html">Jisajili</a>
+      <a href="family_tree.html">Mti wa Ukoo</a>
+      <a href="feedback.html">Maoni</a>
+      <a href="about.html">Kuhusu</a>
+      <a href="logout.html">Toka</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Karibu kwenye dashboard</h2>
+    <p>Chagua sehemu unayotaka kwenda:</p>
+
+    <ul style="margin-top: 20px; list-style: none; padding-left: 0; color: #025005;">
+      <li><a href="events.html" class="dashboard-link">➤ Matukio</a></li>
+      <li><a href="register.html" class="dashboard-link">➤ Sajili Mwanaukoo</a></li>
+      <li><a href="family_tree.html" class="dashboard-link">➤ Vizazi vya Ukoo</a></li>
+      <li><a href="feedback.html" class="dashboard-link">➤ Tuma Maoni</a></li>
+      <li><a href="about.html" class="dashboard-link">➤ Kuhusu Mfumo</a></li>
+      <li><a href="logout.html" class="dashboard-link">➤ Toka</a></li>
+    </ul>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("main-nav").classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
