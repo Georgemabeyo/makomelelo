@@ -3,48 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ingia - Ukoo wa Makomelelo</title>
+  <title>Ingia - Ukoo wa George</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header>
-        <h1>Ukoo wa Makomelelo</h1>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <nav id="main-nav">
-          <a href="index.html">Nyumbani</a>
-          <a href="register.html">Jisajili</a>
-          <a href="login.html" class="active">Ingia</a>
-          <a href="events.html">Matukio</a>
-          <a href="family_tree.html">Ukoo</a>
-        </nav>
-      </header>
+  <header>
+    <h1>Ukoo wa George</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="register.html">Jisajili</a>
+      <a href="login.html" class="active">Ingia</a>
+      <a href="events.html">Matukio</a>
+      <a href="family_tree.html">Ukoo</a>
+    </nav>
+  </header>
+
   <main>
     <div class="form-container login-form">
       <h2>Ingia</h2>
-      <form>
-        <input type="text" placeholder="Jina la mtumiaji au barua pepe" required />
-        <input type="password" placeholder="Nenosiri" required />
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Jina la mtumiaji" required />
+        <input type="password" id="password" placeholder="Nenosiri" required />
         <input type="submit" value="Ingia" />
       </form>
       <div class="extra-links">
-        <a href="register.html">Jisajili kama mwanaukoo mpya</a>
+        <a href="register.html">Jisajili kama mwanaukoo mpya</a> |
         <a href="forgot.html">Umesahau nenosiri?</a>
       </div>
     </div>
   </main>
-<script>function toggleMenu() {
-    const nav = document.getElementById('main-nav');
-    const overlay = document.getElementById('overlay');
-  
-    nav.classList.toggle('active');
-    overlay.classList.toggle('active');
-  }
-  
-  function closeMenu() {
-    document.getElementById('main-nav').classList.remove('active');
-    document.getElementById('overlay').classList.remove('active');
-  }
+
+  <div id="overlay" onclick="closeMenu()"></div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      const overlay = document.getElementById('overlay');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('main-nav').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // ✅ Login form logic
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username && password) {
+        // Hifadhi jina kwenye localStorage
+        localStorage.setItem('loggedInUser', username);
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('Tafadhali jaza jina na nenosiri.');
+      }
+    });
   </script>
-  
 </body>
 </html>
