@@ -7,7 +7,276 @@
   <style>
     /* ======== GLOBAL RESET & BASE ======== */
     * {
-      box-sizing: border-box;
+      box-sizing: border-box;<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matukio - Ukoo wa Makomelelo</title>
+  <style>
+    body {
+      height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('background.png');
+    background-size: cover;
+    position: relative;
+    }
+
+    header {
+      background: linear-gradient(to right, #002d10, #02931c);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 100;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .menu-toggle {
+      display: none;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 2000;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover,
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      #main-nav {nav a {
+  display: block;
+  background: #027a1d;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+nav a:hover {
+  background: #046e1b;
+  transform: scale(1.02);
+}
+
+nav a.active {
+  background: #034f14;
+}
+nav a {
+  display: block;
+  background: #027a1d;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+nav a:hover {
+  background: #046e1b;
+  transform: scale(1.02);
+}
+
+nav a.active {
+  background: #034f14;
+}
+nav a {
+  display: block;
+  background-color: rgba(1, 31, 2, 0.7);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+nav a:hover {
+  background: #046e1b;
+  transform: scale(1.02);
+}
+
+nav a.active {
+  background: #034f14;
+}
+
+  flex-direction: column;
+  background-color: rgba(1, 31, 2, 0.7);
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 50vw;
+  height: 100vh;
+  padding: 20px;
+  padding-top: 80px;
+  gap: 10px;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+#main-nav.active {
+  left: 0;
+}
+
+
+      #main-nav a {
+        padding: 15px 20px;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    main {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #004d1a;
+      margin-bottom: 30px;
+    }
+
+    .event {
+      background: #ffffff;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .event img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .event-content {
+      padding: 20px;
+    }
+
+    .event-content h3 {
+      color: #004d1a;
+      margin-top: 0;
+    }
+
+    .event-content p {
+      color: #444;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #006400;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #333;
+      color: white;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ukoo wa Makomelelo</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="main-nav">
+      <a href="index.html">Nyumbani</a>
+      <a href="register.html">Jisajili</a>
+      <a href="login.html">Ingia</a>
+      <a href="events.html" class="active">Matukio</a>
+      <a href="family_tree.html">Ukoo</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Matukio ya Familia</h2>
+
+    <div class="event">
+      <img src="mfumo2.jpg" alt="Tukio la Harusi" />
+      <div class="event-content">
+        <h3>Harusi ya Neema na Elia</h3>
+        <p>Harusi ya Neema na Elia ilifanyika tarehe 20 Juni 2025 katika kijiji cha Busangi, Geita.</p>
+        <a href="#" class="read-more">Soma Zaidi</a>
+      </div>
+    </div>
+
+    <div class="event">
+      <img src="mfumo.jpg" alt="Tukio la Mkutano" />
+      <div class="event-content">
+        <h3>Mkutano wa Familia 2025</h3>
+        <p>Tunakutana kwa ajili ya mjadala wa maendeleo ya ukoo wetu tarehe 15 Desemba 2025 mjini Mwanza.</p>
+        <a href="#" class="read-more">Soma Zaidi</a>
+      </div>
+    </div>
+
+    <div class="event">
+      <img src="mfumo1.jpg" alt="Tukio la Shughuli" />
+      <div class="event-content">
+        <h3>Uzinduzi wa Mradi wa Shamba la Pamoja</h3>
+        <p>Mradi mpya wa kilimo cha kisasa utaanza rasmi mwezi Julai kwa ajili ya kujitegemea kama ukoo.</p>
+        <a href="#" class="read-more">Soma Zaidi</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Ukoo wa Makomelelo. Haki zote zimehifadhiwa.
+  </footer>
+
+  <script>
+function toggleMenu() {
+  const nav = document.getElementById('main-nav');
+  nav.classList.toggle('active');
+}
+  </script>
+
+</body>
+</html>
+
       margin: 0;
       padding: 0;
     }
