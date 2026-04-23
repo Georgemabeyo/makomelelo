@@ -12,7 +12,10 @@
         :root {
             --primary: #027148;
             --primary-dark: #014d31;
-            --glass: rgba(255, 255, 255, 0.9);
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --bg-light: #f8faf9;
+            --white: #ffffff;
             --transition: all 0.3s ease;
         }
 
@@ -20,8 +23,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            color: #1a2e1a;
-            background: #f4f7f4;
+            color: var(--text-main);
+            background: var(--bg-light);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
@@ -30,55 +33,70 @@
 
         /* ======== HEADER ======== */
         header {
-            background: var(--glass);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 5%;
+            padding: 1rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #eee;
         }
 
-        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
 
-        nav#main-nav { display: flex; gap: 15px; }
+        nav#main-nav { display: flex; gap: 20px; align-items: center; }
         nav#main-nav a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-main);
             font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
+            font-size: 0.95rem;
             transition: var(--transition);
         }
 
-        nav#main-nav a.btn-login { background: var(--primary); color: white; }
-        nav#main-nav a.btn-login:hover { background: var(--primary-dark); }
-
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
+        nav#main-nav a.btn-login { 
+            background: var(--primary); 
+            color: white; 
+            padding: 10px 24px; 
+            border-radius: 50px;
+        }
+        
+        nav#main-nav a:hover:not(.btn-login) { color: var(--primary); }
 
         /* ======== HERO SECTION ======== */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 5%;
+            padding: 140px 8%;
             text-align: center;
             flex: 1;
         }
 
-        .hero h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
-        .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; opacity: 0.9; }
+        .hero h2 { font-size: 3rem; margin-bottom: 20px; font-weight: 800; }
+        .hero p { max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem; opacity: 0.9; }
 
-        /* ======== FOOTER AREA ======== */
+        .btn-cta {
+            padding: 16px 40px;
+            background: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .btn-cta:hover { transform: scale(1.05); }
+
+        /* ======== CLEAN FOOTER ======== */
         footer {
-            background: black;
-            color: white;
-            padding: 50px 0 0 0;
+            background: var(--white);
+            border-top: 1px solid #e1e8e5;
+            padding: 60px 0 0 0;
             margin-top: auto;
         }
 
@@ -86,90 +104,102 @@
             max-width: 1200px;
             margin: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 5%;
-            margin-bottom: 40px;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 50px;
+            padding: 0 8%;
+            margin-bottom: 50px;
         }
 
-        .footer-box {
-            background: #2a2a2a;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(28, 167, 236, 0.15);
-            transition: var(--transition);
+        .footer-box h4 {
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            position: relative;
         }
 
-        .footer-box:hover { transform: translateY(-5px); border-bottom: 3px solid var(--primary); }
-
-        /* Banner Slider Style */
+        /* Minimal Ad Slider */
         #ad-banner {
-            height: 180px;
+            height: 150px;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 12px;
+            background: #eee;
         }
 
         #banner-image {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: opacity 0.8s ease;
         }
 
         #banner-caption {
             position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.7);
+            bottom: 0; width: 100%;
+            background: rgba(2, 113, 72, 0.85);
             color: white;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
-            font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
         }
 
-        /* Social Icons */
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-info i { color: var(--primary); width: 18px; }
+
+        /* Modern Social Links */
         .social-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .social-links a {
-            color: white;
-            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f3f2;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            transition: 0.3s;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
         }
 
-        .social-links a:hover { color: var(--primary); }
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
 
         .bottom-bar {
-            background: #111;
-            padding: 15px;
-            color: #888;
-            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding: 25px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: #fafafa;
         }
 
-        /* ======== MOBILE VIEW ======== */
+        /* ======== RESPONSIVE ======== */
+        @media (max-width: 992px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            nav#main-nav {
-                position: fixed;
-                top: 0; left: -100%;
-                height: 100vh; width: 70%;
-                background: white;
-                flex-direction: column;
-                padding: 80px 30px;
-                transition: 0.4s ease;
-            }
-            nav#main-nav.active { left: 0; }
-            .hero h2 { font-size: 1.8rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .hero h2 { font-size: 2rem; }
+            nav#main-nav { display: none; } /* Simplified for demo */
         }
     </style>
 </head>
@@ -177,7 +207,6 @@
 
     <header>
         <div class="logo">Ukoo Makomelelo</div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav id="main-nav">
             <a href="register.html">Jisajili</a>
             <a href="login.html" class="btn-login">Ingia Mfumoni</a>
@@ -186,55 +215,51 @@
 
     <main class="hero">
         <section>
-            <h2>Karibu kwenye Mfumo wa Ukoo wa Makomelelo</h2>
-            <p>Huu ni mfumo rasmi wa kidijitali utakaokuwezesha kuungana na ndugu zako, kupata taarifa za vizazi, na kufuatilia matukio yote muhimu ya ukoo wetu mahali popote ulipo.</p>
-            <a href="register.html" style="padding: 15px 35px; background: #ffcc00; color: #000; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block;">Anza Sasa</a>
+            <h2>Kuunganisha Vizazi, <br>Kujenga Kesho.</h2>
+            <p>Huu ni mfumo rasmi wa kidijitali utakaokuwezesha kuungana na ndugu zako na kufuatilia matukio yote ya ukoo wetu.</p>
+            <a href="register.html" class="btn-cta">Anza Sasa</a>
         </section>
     </main>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-box" id="ad-banner">
-                <img id="banner-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Banner">
-                <div id="banner-caption">Mfumo huu unakujia hivi punde</div>
+            <div class="footer-box">
+                <h4>Matukio</h4>
+                <div id="ad-banner">
+                    <img id="banner-image" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Banner">
+                    <div id="banner-caption">UNGANA NA NDUGU ZAKO</div>
+                </div>
+            </div>
+
+            <div class="footer-box contact-info">
+                <h4>Mawasiliano</h4>
+                <p><i class="fas fa-phone-alt"></i> +255 712 345 678</p>
+                <p><i class="fas fa-envelope"></i> info@makomelelo.or.tz</p>
+                <p><i class="fas fa-map-marker-alt"></i> Buswelu, Mwanza - Tanzania</p>
             </div>
 
             <div class="footer-box">
-                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-headset"></i> Mawasiliano</h4>
-                <p>📞 +255 712 345 678</p>
-                <p>📧 info@ukoo.makomelelo</p>
-                <p>🏠 Buswelu, Mwanza - Tanzania</p>
-            </div>
-
-            <div class="footer-box">
-                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-share-alt"></i> Mitandao yetu</h4>
+                <h4>Tufuate</h4>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram" style="color:#C13584"></i> Instagram</a>
-                    <a href="#"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp</a>
-                    <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
 
         <div class="bottom-bar">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
-                &copy; 2025 Ukoo wa Makomelelo. Kuunganisha vizazi kwa upendo na umoja. Haki zote zimehifadhiwa.
-            </marquee>
+            &copy; 2026 Ukoo wa Makomelelo. Haki zote zimehifadhiwa. <br>
+            <small style="opacity: 0.7;">Kuunganisha vizazi kwa upendo na umoja.</small>
         </div>
     </footer>
 
     <script>
-        // Menu Toggle logic
-        function toggleMenu() {
-            document.getElementById('main-nav').classList.toggle('active');
-        }
-
-        // Image Slider logic
         const images = [
             { url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80", caption: "UNGANA NA NDUGU ZAKO" },
             { url: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80", caption: "KUMBUKUMBU ZA UKOO" },
-            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", caption: "MFUMO HUU UNAKUJIA HIVI PUNDE" }
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", caption: "USAJILI UNAENDELEA" }
         ];
 
         let currentIndex = 0;
