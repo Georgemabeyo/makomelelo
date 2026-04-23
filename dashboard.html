@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Maoni - Ukoo wa Makomelelo</title>
+    <title>Dashboard - Ukoo wa Makomelelo</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ======== VARIABLES & RESET ======== */
         :root {
-            --primary: #02a167;
-            --primary-dark: #014d31;
-            --accent: #00ff95;
-            --glass: rgba(255, 255, 255, 0.9);
-            --border-glass: rgba(255, 255, 255, 0.3);
-            --text-main: #1a2e1a;
+            --gold-metallic: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #b8860b 100%);
+            --gold-solid: #d4af37;
+            --black-deep: #0a0a0a;
+            --black-soft: #141414;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(212, 175, 55, 0.2);
+            --text-muted: #a4a4a4;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -23,253 +23,282 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-main);
+            background: var(--black-deep);
+            color: white;
             min-height: 100vh;
-            background: 
-                radial-gradient(at 0% 0%, rgba(2, 161, 103, 0.15) 0px, transparent 50%),
-                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=2070') no-repeat center center fixed;
-            background-size: cover;
             display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* ======== HEADER & NAVIGATION ======== */
-        header {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 1rem 8%;
+        /* ======== SIDEBAR ======== */
+        aside.sidebar {
+            width: 280px;
+            background: var(--black-soft);
+            border-right: 1px solid var(--border-glass);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .sidebar-header {
+            padding: 40px 20px;
+            text-align: center;
             border-bottom: 1px solid var(--border-glass);
         }
 
-        .logo {
-            font-size: 1.4rem; font-weight: 800; color: var(--primary-dark);
-            text-transform: uppercase; letter-spacing: -0.5px;
-        }
-
-        nav#main-nav { display: flex; gap: 8px; }
-        nav#main-nav a {
-            text-decoration: none; color: var(--text-main); font-weight: 600;
-            padding: 10px 18px; border-radius: 12px; transition: var(--transition);
-            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
-        }
-        nav#main-nav a:hover, nav#main-nav a.active {
-            background: var(--primary); color: white;
-            box-shadow: 0 8px 15px rgba(2, 161, 103, 0.2);
-        }
-
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); }
-
-        /* ======== MAIN CONTENT ======== */
-        main {
-            padding: 40px 8%;
-            flex: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .section-title {
-            margin-bottom: 30px;
-            color: white;
-            text-align: center;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .section-title h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
-        .section-title p { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
-
-        /* ======== FEEDBACK FORM CARD ======== */
-        .feedback-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display: block; margin-bottom: 8px; font-weight: 700;
-            color: var(--primary-dark); font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.5);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            background: white;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(2, 161, 103, 0.1);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            background: var(--primary);
-            color: white;
+        .sidebar-header h1 {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
             font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
+            color: var(--gold-solid);
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            padding: 25px 15px;
+        }
+
+        .nav-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-submit:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        #feedbackSuccess {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(2, 161, 103, 0.1);
-            color: var(--primary-dark);
+            padding: 14px 18px;
+            color: var(--text-muted);
+            text-decoration: none;
             border-radius: 12px;
-            text-align: center;
+            margin-bottom: 8px;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-item i { margin-right: 15px; width: 20px; text-align: center; font-size: 1.1rem; }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--gold-metallic);
+            color: black;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* ======== MAIN CONTENT ======== */
+        main.main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 40px 5%;
+            background: radial-gradient(circle at top right, #1a1a1a, #0a0a0a);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .mobile-header { display: none; }
+
+        .welcome-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: var(--gold-metallic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-section p { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* ======== DASHBOARD GRID ======== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .dash-card {
+            background: var(--glass-white);
+            border: 1px solid var(--border-glass);
+            padding: 35px;
+            border-radius: 24px;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .dash-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-solid);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .dash-card i {
+            font-size: 2.5rem;
+            color: var(--gold-solid);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .dash-card h3 {
+            font-size: 1.3rem;
             font-weight: 700;
-            border: 1px solid var(--primary);
+            margin-bottom: 12px;
         }
 
-        /* ======== ANIMATIONS ======== */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .dash-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        /* ======== MOBILE VIEW ======== */
-        @media (max-width: 992px) {
-            header { padding: 1rem 5%; }
-            .menu-toggle { display: block; }
-            nav#main-nav {
-                position: fixed; top: 0; right: -100%; height: 100vh; width: 280px;
-                background: white; flex-direction: column; padding: 80px 20px;
-                transition: 0.4s; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        .dash-card .arrow {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: var(--gold-solid);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition);
+        }
+
+        .dash-card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ======== RESPONSIVE ======== */
+        @media (max-width: 1024px) {
+            aside.sidebar { transform: translateX(-100%); }
+            aside.sidebar.active { transform: translateX(0); }
+            main.main-content { margin-left: 0; padding-top: 100px; }
+            
+            .mobile-header {
+                display: flex;
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                background: var(--black-soft);
+                padding: 20px;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--border-glass);
+                z-index: 1100;
             }
-            nav#main-nav.active { right: 0; }
+
+            .menu-toggle {
+                font-size: 1.5rem;
+                color: var(--gold-solid);
+                cursor: pointer;
+            }
         }
 
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); display: none; z-index: 999;
+        /* Overlay */
+        #sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            z-index: 999;
         }
-        #overlay.active { display: block; }
+        #sidebar-overlay.active { display: block; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Ukoo Makomelelo</div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
+    <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>MAKO-DASHBOARD</h1>
         </div>
-        <nav id="main-nav">
-            <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
-            <a href="events.html"><i class="fas fa-calendar-alt"></i> Matukio</a>
-            <a href="family_tree.html"><i class="fas fa-tree"></i> Mti wa Ukoo</a>
-            <a href="feedback.html" class="active"><i class="fas fa-comment-dots"></i> Maoni</a>
-            <a href="index.html" style="color: #d9534f;"><i class="fas fa-sign-out-alt"></i> Toka</a>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</a>
+            <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i> Matukio</a>
+            <a href="register.html" class="nav-item"><i class="fas fa-user-plus"></i> Sajili</a>
+            <a href="family_tree.html" class="nav-item"><i class="fas fa-sitemap"></i> Ukoo</a>
+            <a href="feedback.html" class="nav-item"><i class="fas fa-comment-dots"></i> Maoni</a>
+            <a href="about.html" class="nav-item"><i class="fas fa-info-circle"></i> Kuhusu</a>
+            <div style="margin-top: 40px; border-top: 1px solid var(--border-glass); padding-top: 20px;">
+                <a href="logout.html" class="nav-item" style="color: #ff5e5e;"><i class="fas fa-power-off"></i> Toka</a>
+            </div>
         </nav>
-    </header>
+    </aside>
 
-    <div id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-header">
+        <div class="logo" style="color: var(--gold-solid); font-weight: 800;">MAKO-DASH</div>
+        <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+    </div>
 
-    <main>
-        <div class="section-title">
-            <h2>Toa Maoni Yako</h2>
-            <p>Tunaamini katika umoja na maendeleo. Shiriki nasi mawazo yako.</p>
+    <main class="main-content">
+        <div class="welcome-section">
+            <h2 id="userName">Habari, Mwanaukoo!</h2>
+            <p>Karibu kwenye kitovu cha habari na huduma za Ukoo wa Makomelelo.</p>
         </div>
 
-        <div class="feedback-card">
-            <form id="feedbackForm">
-                <div class="form-group">
-                    <label for="name">Jina Kamili</label>
-                    <input type="text" id="name" class="form-control" placeholder="Ingiza jina lako" required />
-                </div>
+        <div class="dashboard-grid">
+            <a href="events.html" class="dash-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Matukio</h3>
+                <p>Tazama mikutano, sherehe na mipango ijayo ya ukoo wetu.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
 
-                <div class="form-group">
-                    <label for="email">Barua Pepe</label>
-                    <input type="email" id="email" class="form-control" placeholder="barua@pepe.com" required />
-                </div>
+            <a href="register.html" class="dash-card">
+                <i class="fas fa-user-plus"></i>
+                <h3>Sajili Mwanaukoo</h3>
+                <p>Ongeza wanachama wapya au watoto katika kanzidata yetu.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
 
-                <div class="form-group">
-                    <label for="message">Ujumbe/Maoni</label>
-                    <textarea id="message" class="form-control" rows="5" placeholder="Andika maoni yako hapa..." required></textarea>
-                </div>
+            <a href="family_tree.html" class="dash-card">
+                <i class="fas fa-sitemap"></i>
+                <h3>Mti wa Ukoo</h3>
+                <p>Chunguza vizazi na historia ya asili ya familia yetu.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
 
-                <button type="submit" class="btn-submit">
-                    <span>Tuma Maoni</span>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            <a href="feedback.html" class="dash-card">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Tuma Maoni</h3>
+                <p>Shiriki ushauri au mawazo yako ili kuboresha umoja wetu.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
 
-                <div id="feedbackSuccess">
-                    <i class="fas fa-check-circle"></i> Asante! Maoni yako yamepokelewa kikamilifu.
-                </div>
-            </form>
+            <a href="about.html" class="dash-card">
+                <i class="fas fa-gem"></i>
+                <h3>Kuhusu Sisi</h3>
+                <p>Lengo la mfumo huu na viongozi wanaosimamia ukoo.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+
+            <a href="logout.html" class="dash-card" style="border-left: 4px solid #ff5e5e;">
+                <i class="fas fa-sign-out-alt" style="color: #ff5e5e;"></i>
+                <h3>Toka Nje</h3>
+                <p>Funga mfumo kwa usalama unapoondoka.</p>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
         </div>
     </main>
 
     <script>
-        function toggleMenu() {
-            const nav = document.getElementById("main-nav");
-            const overlay = document.getElementById("overlay");
-            const icon = document.querySelector(".menu-toggle i");
-            nav.classList.toggle("active");
-            overlay.classList.toggle("active");
-            if(nav.classList.contains("active")) {
-                icon.classList.replace("fa-bars", "fa-times");
-            } else {
-                icon.classList.replace("fa-times", "fa-bars");
-            }
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+            document.getElementById("sidebar-overlay").classList.toggle("active");
         }
 
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.querySelector('.btn-submit');
-            const successMsg = document.getElementById('feedbackSuccess');
-
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Inatuma...';
-            btn.disabled = true;
-
-            // Simulate sending delay
-            setTimeout(() => {
-                successMsg.style.display = 'block';
-                btn.innerHTML = '<span>Tuma Maoni</span> <i class="fas fa-paper-plane"></i>';
-                btn.disabled = false;
-                document.getElementById('feedbackForm').reset();
-                
-                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-            }, 1500);
-        });
+        // Dynamic Name Loader (If using localStorage)
+        window.onload = function() {
+            const user = localStorage.getItem('loggedInUser');
+            if (user) {
+                document.getElementById('userName').innerText = `Habari, ${user}!`;
+            }
+        };
     </script>
+
 </body>
 </html>
