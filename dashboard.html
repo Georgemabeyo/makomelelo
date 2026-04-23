@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard - Ukoo wa Makomelelo</title>
+    <title>Maoni - Ukoo wa Makomelelo</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -19,11 +19,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -50,145 +46,114 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid var(--border-glass);
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
+            font-size: 1.4rem; font-weight: 800; color: var(--primary-dark);
+            text-transform: uppercase; letter-spacing: -0.5px;
         }
 
-        nav#main-nav {
-            display: flex;
-            gap: 8px;
-        }
-
+        nav#main-nav { display: flex; gap: 8px; }
         nav#main-nav a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            padding: 10px 18px;
-            border-radius: 12px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            text-decoration: none; color: var(--text-main); font-weight: 600;
+            padding: 10px 18px; border-radius: 12px; transition: var(--transition);
+            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
         }
-
         nav#main-nav a:hover, nav#main-nav a.active {
-            background: var(--primary);
-            color: white;
+            background: var(--primary); color: white;
             box-shadow: 0 8px 15px rgba(2, 161, 103, 0.2);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-dark);
-        }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); }
 
         /* ======== MAIN CONTENT ======== */
         main {
             padding: 40px 8%;
             flex: 1;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
             width: 100%;
         }
 
-        .welcome-section {
-            margin-bottom: 40px;
+        .section-title {
+            margin-bottom: 30px;
             color: white;
+            text-align: center;
             animation: fadeInDown 0.8s ease;
         }
 
-        .welcome-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        .section-title p { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
 
-        .welcome-section p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        /* ======== DASHBOARD GRID ======== */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        /* ======== FEEDBACK FORM CARD ======== */
+        .feedback-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: fadeInUp 0.8s ease;
         }
 
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 24px;
-            text-decoration: none;
-            color: var(--text-main);
-            border: 1px solid var(--border-glass);
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block; margin-bottom: 8px; font-weight: 700;
+            color: var(--primary-dark); font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.5);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(2, 161, 103, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
             transition: var(--transition);
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
-        .card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            transition: var(--transition);
-        }
-
-        .card:hover i {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        #feedbackSuccess {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(2, 161, 103, 0.1);
             color: var(--primary-dark);
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .card::after {
-            content: '→';
-            position: absolute;
-            bottom: 20px;
-            right: 25px;
-            font-size: 1.5rem;
-            color: var(--primary);
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: var(--transition);
-        }
-
-        .card:hover::after {
-            opacity: 1;
-            transform: translateX(0);
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid var(--primary);
         }
 
         /* ======== ANIMATIONS ======== */
@@ -201,37 +166,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ======== RESPONSIVE ======== */
+        /* ======== MOBILE VIEW ======== */
         @media (max-width: 992px) {
             header { padding: 1rem 5%; }
             .menu-toggle { display: block; }
-            
             nav#main-nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 280px;
-                background: white;
-                flex-direction: column;
-                padding: 80px 20px;
-                transition: 0.4s;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 280px;
+                background: white; flex-direction: column; padding: 80px 20px;
+                transition: 0.4s; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
             }
-            
             nav#main-nav.active { right: 0; }
-            .welcome-section h2 { font-size: 2rem; }
         }
 
-        /* Overlay for Mobile */
         #overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none; z-index: 999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; z-index: 999;
         }
         #overlay.active { display: block; }
-
     </style>
 </head>
 <body>
@@ -242,11 +193,10 @@
             <i class="fas fa-bars"></i>
         </div>
         <nav id="main-nav">
-            <a href="dashboard.html" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+            <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
             <a href="events.html"><i class="fas fa-calendar-alt"></i> Matukio</a>
-            <a href="register.html"><i class="fas fa-user-plus"></i> Jisajili</a>
             <a href="family_tree.html"><i class="fas fa-tree"></i> Mti wa Ukoo</a>
-            <a href="feedback.html"><i class="fas fa-comment-dots"></i> Maoni</a>
+            <a href="feedback.html" class="active"><i class="fas fa-comment-dots"></i> Maoni</a>
             <a href="index.html" style="color: #d9534f;"><i class="fas fa-sign-out-alt"></i> Toka</a>
         </nav>
     </header>
@@ -254,74 +204,72 @@
     <div id="overlay" onclick="toggleMenu()"></div>
 
     <main>
-        <div class="welcome-section">
-            <h2 id="welcomeText">Habari, Mwanaukoo!</h2>
-            <p>Karibu kwenye mfumo wa kidijitali wa Ukoo wa Makomelelo. Chagua huduma hapa chini:</p>
+        <div class="section-title">
+            <h2>Toa Maoni Yako</h2>
+            <p>Tunaamini katika umoja na maendeleo. Shiriki nasi mawazo yako.</p>
         </div>
 
-        <div class="dashboard-grid">
-            <a href="events.html" class="card">
-                <i class="fas fa-calendar-check"></i>
-                <h3>Matukio</h3>
-                <p>Angalia mikutano, sherehe, na matukio muhimu yanayokuja ya ukoo wetu.</p>
-            </a>
+        <div class="feedback-card">
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">Jina Kamili</label>
+                    <input type="text" id="name" class="form-control" placeholder="Ingiza jina lako" required />
+                </div>
 
-            <a href="register.html" class="card">
-                <i class="fas fa-users-cog"></i>
-                <h3>Sajili Mwanaukoo</h3>
-                <p>Ongeza mwanachama mpya au watoto kwenye kanzidata ya ukoo wetu.</p>
-            </a>
+                <div class="form-group">
+                    <label for="email">Barua Pepe</label>
+                    <input type="email" id="email" class="form-control" placeholder="barua@pepe.com" required />
+                </div>
 
-            <a href="family_tree.html" class="card">
-                <i class="fas fa-network-wired"></i>
-                <h3>Vizazi vya Ukoo</h3>
-                <p>Chunguza historia na mti wa ukoo ili kuona jinsi sote tunahusiana.</p>
-            </a>
+                <div class="form-group">
+                    <label for="message">Ujumbe/Maoni</label>
+                    <textarea id="message" class="form-control" rows="5" placeholder="Andika maoni yako hapa..." required></textarea>
+                </div>
 
-            <a href="feedback.html" class="card">
-                <i class="fas fa-bullhorn"></i>
-                <h3>Tuma Maoni</h3>
-                <p>Je, una wazo au ushauri? Tushirikishe ili kuboresha umoja wetu.</p>
-            </a>
+                <button type="submit" class="btn-submit">
+                    <span>Tuma Maoni</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
 
-            <a href="about.html" class="card">
-                <i class="fas fa-info-circle"></i>
-                <h3>Kuhusu Mfumo</h3>
-                <p>Jifunze zaidi kuhusu lengo la mfumo huu na viongozi wa ukoo.</p>
-            </a>
-
-            <a href="logout.html" class="card" style="border-left: 5px solid #d9534f;">
-                <i class="fas fa-power-off" style="color: #d9534f;"></i>
-                <h3>Toka Nje</h3>
-                <p>Funga akaunti yako kwa usalama baada ya kumaliza matumizi.</p>
-            </a>
+                <div id="feedbackSuccess">
+                    <i class="fas fa-check-circle"></i> Asante! Maoni yako yamepokelewa kikamilifu.
+                </div>
+            </form>
         </div>
     </main>
 
     <script>
-        // Set dynamic welcome message from Login name
-        window.onload = function() {
-            const user = localStorage.getItem('loggedInUser');
-            if (user) {
-                document.getElementById('welcomeText').innerText = `Habari, ${user}!`;
-            }
-        };
-
         function toggleMenu() {
             const nav = document.getElementById("main-nav");
             const overlay = document.getElementById("overlay");
             const icon = document.querySelector(".menu-toggle i");
-            
             nav.classList.toggle("active");
             overlay.classList.toggle("active");
-            
             if(nav.classList.contains("active")) {
                 icon.classList.replace("fa-bars", "fa-times");
             } else {
                 icon.classList.replace("fa-times", "fa-bars");
             }
         }
-    </script>
 
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-submit');
+            const successMsg = document.getElementById('feedbackSuccess');
+
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Inatuma...';
+            btn.disabled = true;
+
+            // Simulate sending delay
+            setTimeout(() => {
+                successMsg.style.display = 'block';
+                btn.innerHTML = '<span>Tuma Maoni</span> <i class="fas fa-paper-plane"></i>';
+                btn.disabled = false;
+                document.getElementById('feedbackForm').reset();
+                
+                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
