@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ukoo wa Makomelelo - Karibu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Dashboard - Ukoo wa Makomelelo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -18,17 +18,20 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             min-height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center fixed;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=2070') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
         }
 
         /* ======== HEADER ======== */
@@ -50,168 +53,144 @@
             font-weight: 800;
             color: var(--primary);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        nav#main-nav { display: flex; gap: 10px; }
+        /* ======== NAVIGATION ======== */
+        nav#main-nav {
+            display: flex;
+            gap: 10px;
+        }
+
         nav#main-nav a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
-        nav#main-nav a:hover { background: var(--primary); color: white; }
-        nav#main-nav a.active { background: var(--primary); color: white; }
-
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
-
-        /* ======== HERO SECTION ======== */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 5%;
-        }
-
-        .hero-card {
-            background: var(--glass-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .hero-card h2 {
-            font-size: 2.2rem;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero-card p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: #444;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-dark); transform: scale(1.05); }
-        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
-
-        /* ======== FOOTER SECTION ======== */
-        footer {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
+        nav#main-nav a:hover {
+            background: var(--primary);
             color: white;
-            padding: 40px 5% 0 5%;
-            margin-top: 50px;
         }
 
-        .footer-grid {
+        nav#main-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* ======== MAIN CONTENT ======== */
+        main {
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: var(--glass-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border-left: 8px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .welcome-section h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+        }
+
+        /* ======== DASHBOARD GRID ======== */
+        .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 30px;
+            gap: 20px;
         }
 
-        .footer-box {
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-box h4 {
-            margin-bottom: 20px;
-            color: var(--accent);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* Banner Slider */
-        #ad-banner {
-            height: 150px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        #banner-image {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        #banner-caption {
-            position: absolute; bottom: 0; width: 100%;
-            background: rgba(2, 113, 72, 0.8);
-            padding: 8px; text-align: center;
-            font-size: 13px; font-weight: bold;
-        }
-
-        /* Social Icons */
-        .social-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: white;
+        .card {
+            background: var(--glass-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
             text-decoration: none;
+            color: var(--text-dark);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.3);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .card p {
             font-size: 0.9rem;
-            transition: 0.3s;
+            opacity: 0.8;
         }
 
-        .social-links a:hover { color: var(--accent); }
-
-        .bottom-marquee {
-            background: #000;
-            padding: 10px;
-            margin: 0 -5.5%; /* Expand to edges */
-            font-size: 0.85rem;
-            color: #aaa;
+        .card:hover {
+            transform: translateY(-10px);
+            background: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* ======== RESPONSIVE ======== */
-        @media (max-width: 768px) {
+        .card:hover i {
+            transform: scale(1.1);
+        }
+
+        .logout-card:hover {
+            border-color: #ff4444;
+        }
+        .logout-card:hover i {
+            color: #ff4444;
+        }
+
+        /* ======== RESPONSIVE DESIGN ======== */
+        @media (max-width: 992px) {
             .menu-toggle { display: block; }
+
             nav#main-nav {
-                position: fixed; top: 0; right: -100%;
-                height: 100vh; width: 280px;
-                background: white; flex-direction: column;
-                padding: 80px 20px; transition: 0.4s;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: white;
+                flex-direction: column;
+                padding: 80px 20px;
+                transition: 0.4s;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             }
+
             nav#main-nav.active { right: 0; }
-            .hero-card h2 { font-size: 1.6rem; }
+            
+            nav#main-nav a {
+                width: 100%;
+                font-size: 1.1rem;
+                padding: 15px;
+                border-bottom: 1px solid #eee;
+            }
         }
     </style>
 </head>
@@ -223,62 +202,68 @@
             <i class="fas fa-bars"></i>
         </div>
         <nav id="main-nav">
+            <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> Matukio</a>
             <a href="register.html"><i class="fas fa-user-plus"></i> Jisajili</a>
-            <a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Ingia</a>
+            <a href="family_tree.html"><i class="fas fa-sitemap"></i> Mti wa Ukoo</a>
+            <a href="feedback.html"><i class="fas fa-comment-dots"></i> Maoni</a>
+            <a href="about.html"><i class="fas fa-info-circle"></i> Kuhusu</a>
+            <a href="logout.html" style="color: #ff4444;"><i class="fas fa-sign-out-alt"></i> Toka</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero-card">
-            <h2>Karibu kwenye Mfumo wa Ukoo wa Makomelelo</h2>
-            <p>Huu ni mfumo rasmi wa ukoo unaokuwezesha kuungana na ndugu zako, kupata taarifa za vizazi, na kufuatilia matukio yote muhimu ya familia yetu kidijitali.</p>
-            <div class="cta-buttons">
-                <a href="register.html" class="btn btn-primary">Jiunge Sasa</a>
-                <a href="login.html" class="btn btn-outline">Ingia Mfumoni</a>
-            </div>
+        <section class="welcome-section">
+            <h2>Karibu, Mwanaukoo!</h2>
+            <p>Tumia dashibodi hii kusimamia taarifa zako, kuona historia ya ukoo, na kufuatilia matukio muhimu ya familia yetu.</p>
         </section>
+
+        <div class="dashboard-grid">
+            <a href="events.html" class="card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Matukio</h3>
+                <p>Tazama shughuli na mikutano ijayo ya ukoo.</p>
+            </a>
+
+            <a href="register.html" class="card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Sajili Mwanaukoo</h3>
+                <p>Ongeza mwanachama mpya kwenye mfumo wa ukoo.</p>
+            </a>
+
+            <a href="family_tree.html" class="card">
+                <i class="fas fa-tree"></i>
+                <h3>Vizazi vya Ukoo</h3>
+                <p>Chunguza asili na mti wa vizazi vya Makomelelo.</p>
+            </a>
+
+            <a href="feedback.html" class="card">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Tuma Maoni</h3>
+                <p>Toa ushauri au ripoti tatizo lolote la mfumo.</p>
+            </a>
+
+            <a href="about.html" class="card">
+                <i class="fas fa-university"></i>
+                <h3>Kuhusu Mfumo</h3>
+                <p>Jifunze zaidi kuhusu malengo ya tovuti hii.</p>
+            </a>
+
+            <a href="logout.html" class="card logout-card">
+                <i class="fas fa-power-off"></i>
+                <h3>Toka Nje</h3>
+                <p>Funga akaunti yako kwa usalama.</p>
+            </a>
+        </div>
     </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-box">
-                <h4>Taarifa za Mfumo</h4>
-                <div id="ad-banner">
-                    <img id="banner-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Banner">
-                    <div id="banner-caption">Mfumo huu unakujia hivi punde</div>
-                </div>
-            </div>
-
-            <div class="footer-box">
-                <h4>Mawasiliano</h4>
-                <p style="margin-bottom: 10px;"><i class="fas fa-phone-alt" style="color: var(--accent)"></i> +255 712 345 678</p>
-                <p style="margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--accent)"></i> info@ukoo.makomelelo</p>
-                <p><i class="fas fa-map-marker-alt" style="color: var(--accent)"></i> Buswelu - Mwanza, TZ</p>
-            </div>
-
-            <div class="footer-box">
-                <h4>Mitandao ya Kijamii</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram" style="color:#C13584"></i> Instagram</a>
-                    <a href="#"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp</a>
-                    <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bottom-marquee">
-            <marquee behavior="scroll" direction="left" scrollamount="4">
-                &copy; 2025 Ukoo wa Makomelelo. Haki zote zimehifadhiwa. Imetengenezwa kwa ajili ya kuunganisha vizazi.
-            </marquee>
-        </div>
-    </footer>
 
     <script>
         function toggleMenu() {
             const nav = document.getElementById("main-nav");
-            nav.classList.toggle("active");
             const icon = document.querySelector(".menu-toggle i");
+            nav.classList.toggle("active");
+            
+            // Switch icons between hamburger and X
             if(nav.classList.contains("active")) {
                 icon.classList.replace("fa-bars", "fa-times");
             } else {
@@ -286,26 +271,16 @@
             }
         }
 
-        // Image Slider logic
-        const images = [
-            { url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80", caption: "UNGANA NA NDUGU ZAKO" },
-            { url: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80", caption: "KUMBUKUMBU ZA UKOO" },
-            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", caption: "MFUMO HUU UNAKUJIA HIVI PUNDE" }
-        ];
-
-        let currentIndex = 0;
-        const bannerImg = document.getElementById("banner-image");
-        const bannerCaption = document.getElementById("banner-caption");
-
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            bannerImg.style.opacity = 0;
-            setTimeout(() => {
-                bannerImg.src = images[currentIndex].url;
-                bannerCaption.textContent = images[currentIndex].caption;
-                bannerImg.style.opacity = 1;
-            }, 800);
-        }, 5000);
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById("main-nav");
+            const toggle = document.querySelector(".menu-toggle");
+            if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+                nav.classList.remove("active");
+                document.querySelector(".menu-toggle i").classList.replace("fa-times", "fa-bars");
+            }
+        });
     </script>
+
 </body>
 </html>
