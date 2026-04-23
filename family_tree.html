@@ -29,7 +29,18 @@
         }
 
         /* ======== SIDEBAR ======== */
-     
+        aside.sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-bg);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
         /* Update your variables or replace the values directly below */
 :root {
     --gold-metallic: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #b8860b 100%);
