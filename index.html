@@ -1,216 +1,255 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mfumo wa Ukoo wa Makomelelo</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karibu - Ukoo wa Makomelelo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ======== GLOBAL STYLES ======== */
+        :root {
+            --primary: #027148;
+            --primary-dark: #014d31;
+            --glass: rgba(255, 255, 255, 0.9);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a2e1a;
+            background: #f4f7f4;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ======== HEADER ======== */
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+
+        nav#main-nav { display: flex; gap: 15px; }
+        nav#main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        nav#main-nav a.btn-login { background: var(--primary); color: white; }
+        nav#main-nav a.btn-login:hover { background: var(--primary-dark); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
+
+        /* ======== HERO SECTION ======== */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+            flex: 1;
+        }
+
+        .hero h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
+        .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; opacity: 0.9; }
+
+        /* ======== FOOTER AREA ======== */
+        footer {
+            background: #1e1e1e;
+            color: white;
+            padding: 50px 0 0 0;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 40px;
+        }
+
+        .footer-box {
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(28, 167, 236, 0.15);
+            transition: var(--transition);
+        }
+
+        .footer-box:hover { transform: translateY(-5px); border-bottom: 3px solid var(--primary); }
+
+        /* Banner Slider Style */
+        #ad-banner {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        #banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.8s ease;
+        }
+
+        #banner-caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Social Icons */
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { color: var(--primary); }
+
+        .bottom-bar {
+            background: #111;
+            padding: 15px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* ======== MOBILE VIEW ======== */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav#main-nav {
+                position: fixed;
+                top: 0; left: -100%;
+                height: 100vh; width: 70%;
+                background: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                transition: 0.4s ease;
+            }
+            nav#main-nav.active { left: 0; }
+            .hero h2 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
-      <h1>Ukoo wa Makomelelo</h1>
-      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-      <nav id="main-nav">
-        <a href="register.html">Jisajili</a>
-        <a href="login.html">Ingia</a>
-      </nav>
+        <div class="logo">Ukoo Makomelelo</div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="main-nav">
+            <a href="register.html">Jisajili</a>
+            <a href="login.html" class="btn-login">Ingia Mfumoni</a>
+        </nav>
     </header>
-  
-    <main>
-      <section>
-        <h2>Karibu kwenye Mfumo wa Ukoo wa Makomelelo</h2>
-        <p>Huu ni mfumo rasmi wa ukoo wa Makomelelo ambao utakuwezesha kuweza kukutana na ndugu wote wa ukoo huu pia utaweza kupata taarifa na matukio mbalimbali kuhusu ukoo wetu</p>
-      </section>
-      
+
+    <main class="hero">
+        <section>
+            <h2>Karibu kwenye Mfumo wa Ukoo wa Makomelelo</h2>
+            <p>Huu ni mfumo rasmi wa kidijitali utakaokuwezesha kuungana na ndugu zako, kupata taarifa za vizazi, na kufuatilia matukio yote muhimu ya ukoo wetu mahali popote ulipo.</p>
+            <a href="register.html" style="padding: 15px 35px; background: #ffcc00; color: #000; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block;">Anza Sasa</a>
+        </section>
     </main>
-  
 
-    <footer style="background-color: #333; color: white; padding: 20px 0;">
-
-      <div style="max-width: 1200px; margin: auto; padding: 0 20px;">
-      
-        <!-- Maboksi ya ndani, sasa mpangilio mpya -->
-        <div style="
-          display: flex; 
-          flex-wrap: wrap;  
-          gap: 20px; 
-          justify-content: center; 
-          margin-bottom: 30px; 
-          align-items: stretch;
-        ">
-          
-          <!-- Tangazo Banner (Mwanzo) -->
-          <div id="ad-banner" style="
-            flex: 1 1 280px;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(28, 167, 236, 0.7);
-            position: relative;
-            background: #444;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          ">
-            <img
-              id="banner-image"
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-              alt="Tangazo"
-              style="width: 100%; height: 100%; object-fit: cover; transition: opacity 1s ease-in-out; position: absolute; top: 0; left: 0;"
-            />
-            <div id="banner-caption" style="
-              position: relative;
-              z-index: 2;
-              text-align: center;
-              font-size: 16px;
-              background: rgba(0,0,0,0.5);
-              padding: 5px 0;
-              font-weight: bold;
-              user-select: none;
-              color: white;
-            ">
-              mfumo huu unakujia hivi punde
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-box" id="ad-banner">
+                <img id="banner-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Banner">
+                <div id="banner-caption">Mfumo huu unakujia hivi punde</div>
             </div>
-          </div>
-    
-          <!-- Mawasiliano (Kati) -->
-          <div style="
-            flex: 1 1 280px; 
-            background: #444; 
-            border-radius: 8px; 
-            padding: 20px; 
-            box-sizing: border-box; 
-            text-align: center;
-            box-shadow: 0 0 15px rgba(28, 167, 236, 0.7);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          ">
-            <h4 style="margin-bottom: 15px;">Mawasiliano</h4>
-            <p style="margin: 5px 0;">📞 Simu: +255 712 345 678</p>
-            <p style="margin: 5px 0;">📧 Barua Pepe: <a href="mailto:info@ukoo.makomelelo" style="color: white;">info@ukoo.makomelelo</a></p>
-            <p style="margin: 5px 0;">🏠 Makao makuu ya ukoo: Buswelu-Mwanza</p>
-          </div>
-    
-<!-- Mitandao ya Kijamii (Mwisho) -->
-<div style="
-  flex: 1 1 280px;
-  background: #444;
-  border-radius: 8px; 
-  padding: 20px; 
-  box-sizing: border-box; 
-  text-align: center; 
-  box-shadow: 0 0 15px rgba(28, 167, 236, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-">
-  <h4 style="margin-bottom: 15px; color: #e1f0fb;">Mitandao ya Kijamii</h4>
-  <div style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
-    justify-items: center;
-    align-items: center;
-    font-weight: 600;
-    color: white;
-  ">
-    <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px;">
-      <!-- Facebook official logo -->
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg" aria-label="Facebook">
-        <path d="M22.675 0h-21.35C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.313h3.588l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.407 24 22.674V1.326C24 .593 23.407 0 22.675 0z"/>
-      </svg>
-      Facebook
-    </a>
 
-    <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px;">
-      <!-- Instagram official logo with adjusted fill -->
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#C13584" xmlns="http://www.w3.org/2000/svg" aria-label="Instagram">
-        <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5a3.75 3.75 0 003.75-3.75v-8.5A3.75 3.75 0 0016.25 4h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.5-3a1 1 0 110 2 1 1 0 010-2z"/>
-      </svg>
-      Instagram
-    </a>
+            <div class="footer-box">
+                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-headset"></i> Mawasiliano</h4>
+                <p>📞 +255 712 345 678</p>
+                <p>📧 info@ukoo.makomelelo</p>
+                <p>🏠 Buswelu, Mwanza - Tanzania</p>
+            </div>
 
-    <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px;">
-      <!-- WhatsApp official logo -->
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg" aria-label="WhatsApp">
-        <path d="M20.52 3.48A11.927 11.927 0 0012 0C5.372 0 0 5.372 0 12c0 2.108.553 4.074 1.513 5.796L0 24l6.422-1.513A11.927 11.927 0 0012 24c6.628 0 12-5.372 12-12 0-3.198-1.254-6.2-3.48-8.52zm-8.52 16.63a8.198 8.198 0 01-4.31-1.286l-.31-.188-3.818 1.002 1.015-3.705-.2-.319a8.213 8.213 0 1110.866 3.496 8.16 8.16 0 01-3.243.992zm4.45-5.234c-.247-.124-1.464-.722-1.69-.804-.226-.082-.39-.124-.554.123s-.635.804-.78.968c-.144.164-.288.184-.535.062-.247-.124-1.042-.384-1.986-1.227-.734-.653-1.23-1.46-1.375-1.707-.144-.247-.015-.38.11-.503.112-.11.247-.288.371-.432.124-.144.165-.247.247-.412.082-.165.041-.309-.02-.433-.062-.124-.554-1.336-.758-1.83-.198-.482-.4-.417-.554-.425-.144-.007-.309-.007-.473-.007-.164 0-.432.062-.66.309s-.866.848-.866 2.07c0 1.222.886 2.402 1.01 2.57.124.165 1.744 2.662 4.23 3.732.591.255 1.05.406 1.408.52.591.184 1.13.158 1.556.096.474-.062 1.464-.597 1.672-1.174.206-.577.206-1.07.144-1.174-.062-.103-.226-.165-.473-.29z"/>
-      </svg>
-      WhatsApp
-    </a>
+            <div class="footer-box">
+                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-share-alt"></i> Mitandao yetu</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-instagram" style="color:#C13584"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp</a>
+                    <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+        </div>
 
-    <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px;">
-  <!-- TikTok official logo (multi-color) -->
-  <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="TikTok" role="img" fill="none">
-    <path fill="#25F4EE" d="M9.328 4.47v7.845a3.618 3.618 0 01-3.6-3.6H3.69a6.4 6.4 0 005.638 6.325v-7.11z"/>
-    <path fill="#FE2C55" d="M13.56 6.736a6.44 6.44 0 004.85 2.126v-3.02a9.35 9.35 0 01-6.454-2.46v2.16a5.74 5.74 0 001.604 0z"/>
-    <path fill="#010101" d="M15.936 20.268a6.997 6.997 0 01-6.932-6.928v-6.385h2.342v7.906a4.58 4.58 0 004.59 4.6h.036v2.153h-.036z"/>
-  </svg>
-  TikTok
-</a>
+        <div class="bottom-bar">
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+                &copy; 2025 Ukoo wa Makomelelo. Kuunganisha vizazi kwa upendo na umoja. Haki zote zimehifadhiwa.
+            </marquee>
+        </div>
+    </footer>
 
-  </div>
-</div>
+    <script>
+        // Menu Toggle logic
+        function toggleMenu() {
+            document.getElementById('main-nav').classList.toggle('active');
+        }
 
+        // Image Slider logic
+        const images = [
+            { url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80", caption: "UNGANA NA NDUGU ZAKO" },
+            { url: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80", caption: "KUMBUKUMBU ZA UKOO" },
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", caption: "MFUMO HUU UNAKUJIA HIVI PUNDE" }
+        ];
 
-    
-        </div> <!-- mwisho wa div ya maboksi -->
-    
-      </div> <!-- max-width container -->
-    
-      <!-- Marquee peke yake chini kabisa -->
-      <div style="background-color: #111; padding: 10px; text-align: center; color: white; font-weight: bold;">
-        <marquee behavior="scroll" direction="left" scrollamount="4" style="color: white;">
-          &copy; 2025 Ukoo wa Makomeleolo. Haki zote zimehifadhiwa.
-        </marquee>
-      </div>
-<script>    
- const images = [
-  {
-    url: "images/mfumo.jpg", // picha yako ya kwanza
-    caption: "MFUMO HUU UTAKUJIA HIVI PUNDE"
-  },
-  {
-    url: "images/mfumo2.jpg", // picha yako ya pili
-    caption: "MFUMO HUU UTAKUJIA HIVI PUNDE"
-  },
-  {
-    url: "images/mfumo3.jpg", // picha yako ya tatu
-    caption: "MFUMO HUU UTAKUJIA HIVI PUNDE"
-  }
-];
-
-    
         let currentIndex = 0;
         const bannerImg = document.getElementById("banner-image");
         const bannerCaption = document.getElementById("banner-caption");
-    
-        setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          bannerImg.style.opacity = 0;
-          setTimeout(() => {
-            bannerImg.src = images[currentIndex].url;
-            bannerCaption.textContent = images[currentIndex].caption;
-            bannerImg.style.opacity = 1;
-          }, 500);
-        }, 6000);
-      </script>
-    
-    </footer>
-    
-    
-    
-    
-    
-    <script>
-      function toggleMenu() {
-        const nav = document.getElementById('main-nav');
-        nav.classList.toggle('active');
-      }
-    </script>
-  </body>
 
-  
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            bannerImg.style.opacity = 0;
+            setTimeout(() => {
+                bannerImg.src = images[currentIndex].url;
+                bannerCaption.textContent = images[currentIndex].caption;
+                bannerImg.style.opacity = 1;
+            }, 800);
+        }, 5000);
+    </script>
+</body>
 </html>
